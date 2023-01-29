@@ -32,7 +32,7 @@ pipeline {
                 bat """
                 cd ${projectName}
                 dotnet build -c Release /p:Version=${BUILD_NUMBER}
-                dotnet publish -c Release --no-build
+                dotnet publish -o  C:\\inetpub\\wwwroot\\jenkins-test
                 """
             }
         }
