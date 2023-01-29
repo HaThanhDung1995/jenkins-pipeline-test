@@ -16,20 +16,25 @@ pipeline {
     agent any
     stages {
         stage('Checkout') {
-        checkout([
-            $class: 'GitSCM', 
-            branches: [[name: 'master']], 
-            doGenerateSubmoduleConfigurations: false, 
-            extensions: [], 
-            submoduleCfg: [], 
-            userRemoteConfigs: [[url: """ "${githubUrl}" """]]])
+            steps {
+                checkout([
+                $class: 'GitSCM', 
+                branches: [[name: 'master']], 
+                doGenerateSubmoduleConfigurations: false, 
+                extensions: [], 
+                submoduleCfg: [], 
+                userRemoteConfigs: [[url: """ "${githubUrl}" """]]])
+            }
+        
     }
         stage('Build') {
-            bat """
-            cd ${projectName}
-            dotnet build -c Release /p:Version=${BUILD_NUMBER}
-            dotnet publish -c Release --no-build
-            """
+            steps {
+                bat """
+                cd ${projectName}
+                dotnet build -c Release /p:Version=${BUILD_NUMBER}
+                dotnet publish -c Release --no-build
+                """
+            }
         }
     }
 }
