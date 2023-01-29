@@ -2,30 +2,34 @@
 String githubUrl = "https://github.com/HaThanhDung1995/jenkins-pipeline-test"
 
 //Kaynak kodun içerisindeki projenin ismi
-String projectName = "CISample/CISample.App"
+String projectName = "TestServer/TestServer.App"
 
 //Kaynak kodun publish edileceği dizin
-String publishedPath = "CISample\\CISample.App\\bin\\Release\\netcoreapp2.2\\publish"
+String publishedPath = "TestServer\\TestServer.App\\bin\\Release\\netcoreapp2.2\\publish"
 
 //Hedef makinesindeki IIS'de tanımlı olan sitenizin ismi
 String iisApplicationName = "cisample"
 
 //Hedef makinesindeki IIS'de tanımlı olan sitenizin dizini
-String iisApplicationPath = "D:\\WebSites\\cisample"
+String iisApplicationPath = "C:\\inetpub\\wwwroot\\jenkins-test"
 pipeline {
     agent any
     stages {
-        stage('Clone') {
-            steps {
-                git 'https://github.com/HaThanhDung1995/jenkins-pipeline-test'
-            }
+        stage('Checkout') {
+        checkout([
+            $class: 'GitSCM', 
+            branches: [[name: 'master']], 
+            doGenerateSubmoduleConfigurations: false, 
+            extensions: [], 
+            submoduleCfg: [], 
+            userRemoteConfigs: [[url: """ "${githubUrl}" """]]])
+    }
+        stage('Build') {
+            bat """
+            cd ${projectName}
+            dotnet build -c Release /p:Version=${BUILD_NUMBER}
+            dotnet publish -c Release --no-build
+            """
         }
-        // stage('Build') {
-        //     bat """
-        //     cd ${projectName}
-        //     dotnet build -c Release /p:Version=${BUILD_NUMBER}
-        //     dotnet publish -c Release --no-build
-        //     """
-        // }
     }
 }

@@ -1,0 +1,11 @@
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\TestServer.exe
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\appsettings.Development.json
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\appsettings.json
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\TestServer.dll
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\TestServer.deps.json
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\TestServer.runtimeconfig.json
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\TestServer.pdb
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\ProjectHandMake\SeminalAddition\TestServer\TestServer\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerUI.dll

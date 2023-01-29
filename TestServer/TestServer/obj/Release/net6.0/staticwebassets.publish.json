@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "4IBXafBFb7MaPxdrwW2ZzyDGTkQhKkGhyP0OSapqUFY=",
+  "Source": "TestServer",
+  "BasePath": "_content/TestServer",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
