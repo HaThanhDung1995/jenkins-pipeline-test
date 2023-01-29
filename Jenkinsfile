@@ -12,7 +12,7 @@ String iisApplicationName = "cisample"
 
 //Hedef makinesindeki IIS'de tanımlı olan sitenizin dizini
 String iisApplicationPath = "C:\\inetpub\\wwwroot\\jenkins-test"
-node {
+pipeline {
     agent any
     stages {
         stage('Checkout') {
