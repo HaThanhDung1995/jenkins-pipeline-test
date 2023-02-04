@@ -1,6 +1,6 @@
 //Kaynak kodun adresi
 String githubUrl = "https://github.com/HaThanhDung1995/jenkins-pipeline-test"
-
+//test
 //Kaynak kodun içerisindeki projenin ismi
 String projectName = "MyPhamTrueLife"
 
