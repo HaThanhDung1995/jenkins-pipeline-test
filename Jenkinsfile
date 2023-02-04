@@ -30,9 +30,11 @@ pipeline {
         stage('Build') {
             steps {
                 bat """
+                iisreset /stop
                 cd ${projectName}
                 dotnet build -c Release /p:Version=${BUILD_NUMBER}
                 dotnet publish -o  C:\\inetpub\\wwwroot\\jenkins-test
+                iisreset /noforce
                 """
             }
         }
