@@ -98,6 +98,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         {
             try
             {
+                //NoteForFun
                 //int currentUserId = GetCurrentUserId();
                 var result = await _infoCapicityService.DetailCapacityAsync(typeStaffId);
                 return new ResponseResult<InfoCapacity>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result);
