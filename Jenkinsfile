@@ -11,7 +11,7 @@ String publishedPath = "TestServer\\TestServer.App\\bin\\Release\\netcoreapp2.2\
 String iisApplicationName = "cisample"
 
 //Hedef makinesindeki IIS'de tanımlı olan sitenizin dizini
-String iisApplicationPath = "C:\\inetpub\\wwwroot\\jenkins-test"
+String iisApplicationPath = "C:\\inetpub\\wwwroot\\projecttinh"
 pipeline {
     agent any
     stages {

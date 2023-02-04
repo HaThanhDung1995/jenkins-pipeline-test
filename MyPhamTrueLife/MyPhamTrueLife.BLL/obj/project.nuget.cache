@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rMdvfAPCMEMP2Qtjmo1HVQXnlzh2s/oPay3dqaI9AY00bBs+w49umkRbxfjUhi/uDEhOTLKB24oVakcOSsKbFw==",
+  "dgSpecHash": "RPQfjCOoIcOloqkDWgKRBM7lfhRLIBfj50iQ4XcbVtP3OEjdZ+lWbLQ5wUbsitueCO5VJxCOQ3AcdJfFuBSgwg==",
   "success": true,
-  "projectFilePath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
+  "projectFilePath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Dung\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Dung\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

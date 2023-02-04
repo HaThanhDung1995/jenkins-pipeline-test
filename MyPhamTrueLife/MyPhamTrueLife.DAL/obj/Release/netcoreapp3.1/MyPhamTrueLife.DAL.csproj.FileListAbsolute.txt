@@ -1,0 +1,16 @@
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.DAL.deps.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.DAL.runtimeconfig.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.DAL.runtimeconfig.dev.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.DAL.dll
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.DAL.pdb
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.Common.dll
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\bin\Release\netcoreapp3.1\MyPhamTrueLife.Common.pdb
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.csproj.AssemblyReference.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.GeneratedMSBuildEditorConfig.editorconfig
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.AssemblyInfoInputs.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.AssemblyInfo.cs
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.csproj.CoreCompileInputs.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.csproj.CopyComplete
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.dll
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.pdb
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.DAL\obj\Release\netcoreapp3.1\MyPhamTrueLife.DAL.genruntimeconfig.cache

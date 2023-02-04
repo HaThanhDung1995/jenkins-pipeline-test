@@ -1,0 +1,13 @@
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.deps.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.runtimeconfig.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.runtimeconfig.dev.json
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.dll
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.pdb
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.csproj.AssemblyReference.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.AssemblyInfoInputs.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.AssemblyInfo.cs
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.csproj.CoreCompileInputs.cache
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.dll
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.pdb
+E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.genruntimeconfig.cache

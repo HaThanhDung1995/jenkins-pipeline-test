@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {}
+    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {}
   },
   "projects": {
-    "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
+        "projectUniqueName": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
         "projectName": "MyPhamTrueLife.Common",
-        "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
+        "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
         "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-        "outputPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\obj\\",
+        "outputPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",

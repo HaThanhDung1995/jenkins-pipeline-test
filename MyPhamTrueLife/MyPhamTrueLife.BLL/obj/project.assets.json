@@ -5844,11 +5844,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
+      "projectUniqueName": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
       "projectName": "MyPhamTrueLife.BLL",
-      "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
+      "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
       "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-      "outputPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\obj\\",
+      "outputPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5865,11 +5865,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
-              "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
+            "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+              "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
             },
-            "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
-              "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj"
+            "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
+              "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj"
             }
           }
         }
