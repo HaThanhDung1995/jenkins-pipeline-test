@@ -2,7 +2,7 @@
 String githubUrl = "https://github.com/HaThanhDung1995/jenkins-pipeline-test"
 
 //Kaynak kodun içerisindeki projenin ismi
-String projectName = "MyPhamTrueLife.Web"
+String projectName = "MyPhamTrueLife"
 
 //Kaynak kodun publish edileceği dizin
 String publishedPath = "TestServer\\TestServer.App\\bin\\Release\\netcoreapp2.2\\publish"
