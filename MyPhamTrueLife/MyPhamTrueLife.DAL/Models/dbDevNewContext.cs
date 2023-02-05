@@ -629,7 +629,7 @@ namespace MyPhamTrueLife.DAL.Models
 
                 entity.Property(e => e.CreateAt).HasColumnType("datetime");
 
-                entity.Property(e => e.Describe).HasMaxLength(500);
+                entity.Property(e => e.Describe).HasColumnType("ntext");
 
                 entity.Property(e => e.ProductName).HasMaxLength(200);
 
