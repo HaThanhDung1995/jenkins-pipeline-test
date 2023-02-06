@@ -71,14 +71,14 @@ namespace MyPhamTrueLife.BLL.Implement
                             cart.Prize = product[0].Price;
                         }
                     }
-                    if (item.Capacity == null)
+                    else
                     {
                         var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true).OrderByDescending(z => z.StartAt).AsNoTracking().ToListAsync();
                         if (product != null && product.Count > 0)
                         {
                             cart.Prize = product[0].Price;
                         }
-                    }
+                    }    
 
                     var pro = await _unitOfWork.Repository<InfoProduct>().Where(x => x.ProductId.Equals(item.ProductId) && x.DeleteFlag != true).AsNoTracking().FirstOrDefaultAsync();
                     if (pro.IsExpiry == true)
