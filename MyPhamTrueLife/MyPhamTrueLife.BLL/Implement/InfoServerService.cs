@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyPhamTrueLife.BLL.Interface;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using System;
 using System.Collections.Generic;
 using System.Linq;

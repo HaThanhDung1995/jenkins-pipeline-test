@@ -2,7 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MyPhamTrueLife.DAL.Base;
 using MyPhamTrueLife.DAL.Common;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using System;
 using System.Collections.Generic;
 using System.Text;

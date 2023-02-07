@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyPhamTrueLife.BLL.Interface;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using MyPhamTrueLife.DAL.Models.Utils;
 using MyPhamTrueLife.Web.Base;
 using MyPhamTrueLife.Web.Models.Response;

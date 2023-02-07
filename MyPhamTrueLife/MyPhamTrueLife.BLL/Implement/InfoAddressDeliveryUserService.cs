@@ -1,5 +1,5 @@
 ﻿using MyPhamTrueLife.BLL.Interface;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using MyPhamTrueLife.DAL.Models.Utils;
 using System;
 using System.Collections.Generic;

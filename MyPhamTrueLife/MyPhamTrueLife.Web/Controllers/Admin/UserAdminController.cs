@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyPhamTrueLife.BLL.Interface;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using MyPhamTrueLife.DAL.Models.Utils;
 using MyPhamTrueLife.Web.Base;
 using MyPhamTrueLife.Web.Models.Response;
@@ -58,6 +58,28 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             catch (Exception ex)
             {
                 return new ResponseResult<LoginResponse>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [HttpPost]
+        [Route("tao-lich-lam-viec")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> TaoLichLamViec(int userId)
+        {
+            try
+            {
+                
+                var result = await _userAdmin.TaoLichLamViec(userId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Tạo lịch làm việc thất bại", null);
+                }
+                //result.Token = CreateToken(result);
+                return new ResponseResult<string>(RetCodeEnum.Ok, "Tạo lịch làm việc thành công", result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyPhamTrueLife.BLL.Interface;
-using MyPhamTrueLife.DAL.Models;
+using MyPhamTrueLife.DAL.Models1;
 using MyPhamTrueLife.Web.Models.Response;
 using System;
 using System.Threading.Tasks;
