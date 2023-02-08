@@ -11,5 +11,6 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<bool> AddOrderAsync(InfoOrderInsertRequest value);
         //getlisst admin
         Task<ResponseList> GetListOrderAdminAsync(int page = 1, int limit = 25);
+        Task<bool> UpdateOrderAsync(InfoOrderUpdateStatus value);
     }
 }

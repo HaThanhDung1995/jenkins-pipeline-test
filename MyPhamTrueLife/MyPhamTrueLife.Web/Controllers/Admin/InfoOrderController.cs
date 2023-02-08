@@ -38,5 +38,38 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [Route("cap-nhat-trang-thai-duyet")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateTrangThaiDuyet([FromBody] InfoOrderUpdateStatus value)
+        {
+            try
+            {
+                value.Status = "DADUYET";
+                var result = await _infoOrderService.UpdateOrderAsync(value);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("cap-nhat-trang-thai-da-thanh-toan")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateTrangThaiDaThanhToan([FromBody] InfoOrderUpdateStatus value)
+        {
+            try
+            {
+                var result = await _infoOrderService.UpdateOrderAsync(value);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }

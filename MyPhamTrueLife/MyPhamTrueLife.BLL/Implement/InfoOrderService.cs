@@ -147,5 +147,29 @@ namespace MyPhamTrueLife.BLL.Implement
             result.ListData = listData;
             return result;
         }
+
+        public async Task<bool> UpdateOrderAsync(InfoOrderUpdateStatus value)
+        {
+            var order = await _unitOfWork.Repository<InfoOrder>().Where(x => x.DeleteFlag != true && x.OrderId == value.OrderId).AsNoTracking().FirstOrDefaultAsync();
+            if (order == null)
+            {
+                return false;
+            }
+            if (!string.IsNullOrEmpty(value.Status))
+            {
+                order.Status = value.Status;
+                order.StaffId = value.StaffId;
+            }
+            if (value.IsPay != null)
+            {
+                order.IsPay = value.IsPay;
+            }
+            order.UpdateAt = DateTime.Now;
+            order.UpdateUser = value.StaffId;
+            order.DeleteFlag = false;
+            _unitOfWork.Repository<InfoOrder>().UpdateRange(order);
+            await _unitOfWork.SaveChangeAsync();
+            return true;
+        }
     }
 }
