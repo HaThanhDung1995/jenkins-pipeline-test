@@ -117,11 +117,8 @@ namespace MyPhamTrueLife.BLL.Implement
         {
             var result = new ResponseList();
             var listOrder = _unitOfWork.Repository<InfoOrder>().Where(x => x.DeleteFlag != true);
-            var listUser = _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true);
-            var listStaff = _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true);
+            
             var listData = await( from a in listOrder
-                           join b in listUser on a.UserId equals b.UserId
-                           join c in listStaff on a.StaffId equals c.StaffId
                            select new InfoOrderList()
                            {
                                OrderId = a.OrderId,
@@ -135,11 +132,15 @@ namespace MyPhamTrueLife.BLL.Implement
                                SeverId = a.SeverId,
                                DateTimeD = a.DateTimeD,
                                AddressDeliveryId = a.AddressDeliveryId,
-                               FullName = b.FullName,
-                               FullNameStaff = c.FullName,
+                               //FullName = b.FullName,
+                               //FullNameStaff = c.FullName,
                                CreateAt = a.CreateAt
                            }).AsNoTracking().ToListAsync();
-
+            foreach (var item in listData)
+            {
+                item.FullName = item.UserId == null ? "" : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().Select(z=>z.FullName).FirstOrDefaultAsync();
+                item.FullNameStaff = item.StaffId == null ? "" : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
+            }
             var totalRows = listData.Count();
             result.Paging = new Paging(totalRows, page, limit);
             int start = result.Paging.start;
