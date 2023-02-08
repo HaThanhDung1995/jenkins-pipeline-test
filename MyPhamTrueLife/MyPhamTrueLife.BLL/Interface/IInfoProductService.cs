@@ -13,7 +13,7 @@ namespace MyPhamTrueLife.BLL.Interface
         //Sản phẩm nè
         Task<bool> InsertInfoProductNewAsync(ThongTinThemSanPham value, int userId);
 
-        Task<ProductDetail> ProductDetailAsync(int id, int? nature, int? capacity);
+        //Task<ProductDetail> ProductDetailAsync(int id, int? nature, int? capacity);
         //Task<bool> ThemHinhAnh(ThongTinThemSanPham value, int userId, int productId);
         //Task<bool> ThemGia(ThongTinThemSanPham value, int userId, int productId);
         //Task<bool> ThemDungTich(ThongTinThemSanPham value, int userId, int productId);
