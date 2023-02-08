@@ -194,7 +194,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     {
                         var product = new ListProductSelling();
                         var listPrice = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().OrderByDescending(x => x.StartAt).ToListAsync();
-                        if (listPrice == null || listPrice.Count <= 0)
+                        if (listPrice != null || listPrice.Count > 0)
                         {
                             product.Price = listPrice[0].Price.Value;
                             product.ProductName = item.ProductName;

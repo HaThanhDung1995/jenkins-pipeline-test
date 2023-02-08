@@ -40,7 +40,7 @@ namespace MyPhamTrueLife.BLL.Implement
             order.AddressDeliveryId = value.AddressDeliveryId;
             order.CreateAt = DateTime.Now;
             order.CreateUser = value.UserId;
-            order.DeleteFlag = true;
+            order.DeleteFlag = false;
             //var newOrderCode = "";
             //var orderMax = await _unitOfWork.Repository<InfoOrder>().AsNoTracking().OrderByDescending(x => x.OrderCode).FirstOrDefaultAsync();
             //if (orderMax != null)
