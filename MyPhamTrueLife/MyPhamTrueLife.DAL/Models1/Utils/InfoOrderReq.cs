@@ -17,4 +17,10 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public bool? IsPay { get; set; }
         public List<InfoCart> listCart { get; set; }
     }
+
+    public class InfoOrderList : InfoOrder
+    {
+        public string FullName { get; set; }
+        public string FullNameStaff { get; set; }
+    }
 }

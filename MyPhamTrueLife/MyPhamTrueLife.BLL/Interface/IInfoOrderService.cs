@@ -9,5 +9,7 @@ namespace MyPhamTrueLife.BLL.Interface
     public interface IInfoOrderService
     {
         Task<bool> AddOrderAsync(InfoOrderInsertRequest value);
+        //getlisst admin
+        Task<ResponseList> GetListOrderAdminAsync(int page = 1, int limit = 25);
     }
 }

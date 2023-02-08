@@ -112,5 +112,40 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             return true;
         }
+
+        public async Task<ResponseList> GetListOrderAdminAsync(int page = 1, int limit = 25)
+        {
+            var result = new ResponseList();
+            var listOrder = _unitOfWork.Repository<InfoOrder>().Where(x => x.DeleteFlag != true);
+            var listUser = _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true);
+            var listStaff = _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true);
+            var listData = await( from a in listOrder
+                           join b in listUser on a.UserId equals b.UserId
+                           join c in listStaff on a.StaffId equals c.StaffId
+                           select new InfoOrderList()
+                           {
+                               OrderId = a.OrderId,
+                               UserId = a.UserId,
+                               IsAccept = a.IsAccept,
+                               StaffId = a.StaffId,
+                               Total = a.Total,
+                               Status = a.Status,
+                               IsPay = a.IsPay,
+                               StatusOrder = a.StatusOrder,
+                               SeverId = a.SeverId,
+                               DateTimeD = a.DateTimeD,
+                               AddressDeliveryId = a.AddressDeliveryId,
+                               FullName = b.FullName,
+                               FullNameStaff = c.FullName,
+                               CreateAt = a.CreateAt
+                           }).AsNoTracking().ToListAsync();
+
+            var totalRows = listData.Count();
+            result.Paging = new Paging(totalRows, page, limit);
+            int start = result.Paging.start;
+            listData = listData.OrderByDescending(z=>z.CreateAt).Skip(start).Take(limit).ToList();
+            result.ListData = listData;
+            return result;
+        }
     }
 }
