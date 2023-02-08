@@ -195,30 +195,33 @@ namespace MyPhamTrueLife.BLL.Implement
                     {
                         var product = new ListProductSelling();
                         var listPrice = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().OrderByDescending(x => x.StartAt).ToListAsync();
-                        product.Price = listPrice[0].Price.Value;
-                        product.ProductName = item.ProductName;
-                        product.ProductId = item.ProductId;
-                        product.Avatar = item.Avatar;
-                        product.PriceDiscount = product.Price;
-                        if (promotion != null)
+                        if (listPrice == null || listPrice.Count <= 0)
                         {
-                            var promotionDetail = await _unitOfWork.Repository<InfoPromotionDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().FirstOrDefaultAsync();
-                            if (promotionDetail != null)
+                            product.Price = listPrice[0].Price.Value;
+                            product.ProductName = item.ProductName;
+                            product.ProductId = item.ProductId;
+                            product.Avatar = item.Avatar;
+                            product.PriceDiscount = product.Price;
+                            if (promotion != null)
                             {
-                                int? priceMax = listPrice[0].Price;
-                                if (promotionDetail.DiscountAmount != null && promotionDetail.DiscountAmount >= 0)
+                                var promotionDetail = await _unitOfWork.Repository<InfoPromotionDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().FirstOrDefaultAsync();
+                                if (promotionDetail != null)
                                 {
-                                    priceMax = priceMax - promotionDetail.DiscountAmount;
+                                    int? priceMax = listPrice[0].Price;
+                                    if (promotionDetail.DiscountAmount != null && promotionDetail.DiscountAmount >= 0)
+                                    {
+                                        priceMax = priceMax - promotionDetail.DiscountAmount;
 
+                                    }
+                                    if (promotionDetail.DiscountPercent != null && promotionDetail.DiscountPercent >= 0)
+                                    {
+                                        priceMax = priceMax - ((priceMax * promotionDetail.DiscountAmount) / 100);
+                                    }
+                                    product.PriceDiscount = priceMax.Value;
                                 }
-                                if (promotionDetail.DiscountPercent != null && promotionDetail.DiscountPercent >= 0)
-                                {
-                                    priceMax = priceMax - ((priceMax * promotionDetail.DiscountAmount) / 100);
-                                }
-                                product.PriceDiscount = priceMax.Value;
                             }
+                            listProductSeling.Add(product);
                         }
-                        listProductSeling.Add(product);
                     }
 
                     var totalRows = listProductSeling.Count();
