@@ -223,7 +223,6 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             var info = new ProductDetail();
             info.listCapacity = new List<InfoCapacity>();
-            info.listNature = new List<InfoNature>();
             var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(id)).AsNoTracking().FirstOrDefaultAsync();
             if (product == null)
             {
@@ -233,6 +232,13 @@ namespace MyPhamTrueLife.BLL.Implement
             info.ProductName = product.ProductName;
             info.Trademark = product.Trademark;
             info.StatusProduct = product.StatusProduct;
+            info.NatureId = product.NatureId;
+            if (product.NatureId != null)
+            {
+
+                info.NatureName = await _unitOfWork.Repository<InfoNature>().Where(x => x.DeleteFlag != true && x.NatureId == product.NatureId).AsNoTracking().Select(z => z.NatureName).FirstOrDefaultAsync();
+                info.ProductName += " - " + info.NatureName;
+            }
             info.Describe = product.Describe;
             info.listImage = new List<string>();
             info.listImage.Add(product.Avatar);
@@ -330,10 +336,6 @@ namespace MyPhamTrueLife.BLL.Implement
                 }
             }
             info.QuantityOrder = await _unitOfWork.Repository<InfoOrderDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().SumAsync(z => z.Amount);
-            if (info.listNature.Count <= 0)
-            {
-                info.listNature = null;
-            }
             if (info.listCapacity.Count <= 0)
             {
                 info.listCapacity = null;
