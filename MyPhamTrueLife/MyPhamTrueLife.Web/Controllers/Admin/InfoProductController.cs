@@ -97,7 +97,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             try
             {
                 var result = await _infoProductService.InsertInfoProductNewAsync(value, userId);
-                if (result < 0)
+                if (result != true)
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm sản phẩm thất bại", null);
                 }
@@ -108,63 +108,63 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
-        [Route("them-hinh-anh-san-pham")]
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ResponseResult<string>> ThemHinhAnhSP(ThongTinThemSanPham value, int userId, int productId)
-        {
-            try
-            {
-                var result = await _infoProductService.ThemHinhAnh(value, userId, productId);
-                if (result != true)
-                {
-                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm hình ảnh sản phẩm thất bại", null);
-                }
-                return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm hình ảnh sản phẩm thành công", result.ToString());
-            }
-            catch (Exception ex)
-            {
-                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
-            }
-        }
-        [Route("them-gia-san-pham")]
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ResponseResult<string>> ThemGiaSP(ThongTinThemSanPham value, int userId, int productId)
-        {
-            try
-            {
-                var result = await _infoProductService.ThemGia(value, userId, productId);
-                if (result != true)
-                {
-                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm giá sản phẩm thất bại", null);
-                }
-                return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm giá sản phẩm thành công", result.ToString());
-            }
-            catch (Exception ex)
-            {
-                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
-            }
-        }
+        //[Route("them-hinh-anh-san-pham")]
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ResponseResult<string>> ThemHinhAnhSP(ThongTinThemSanPham value, int userId, int productId)
+        //{
+        //    try
+        //    {
+        //        var result = await _infoProductService.ThemHinhAnh(value, userId, productId);
+        //        if (result != true)
+        //        {
+        //            return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm hình ảnh sản phẩm thất bại", null);
+        //        }
+        //        return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm hình ảnh sản phẩm thành công", result.ToString());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+        //    }
+        //}
+        //[Route("them-gia-san-pham")]
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ResponseResult<string>> ThemGiaSP(ThongTinThemSanPham value, int userId, int productId)
+        //{
+        //    try
+        //    {
+        //        var result = await _infoProductService.ThemGia(value, userId, productId);
+        //        if (result != true)
+        //        {
+        //            return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm giá sản phẩm thất bại", null);
+        //        }
+        //        return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm giá sản phẩm thành công", result.ToString());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+        //    }
+        //}
 
-        [Route("them-dung-tich-san-pham")]
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<ResponseResult<string>> ThemDungTichSP(ThongTinThemSanPham value, int userId, int productId)
-        {
-            try
-            {
-                var result = await _infoProductService.ThemDungTich(value, userId, productId);
-                if (result != true)
-                {
-                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm thất bại", null);
-                }
-                return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm thành công", result.ToString());
-            }
-            catch (Exception ex)
-            {
-                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
-            }
-        }
+        //[Route("them-dung-tich-san-pham")]
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<ResponseResult<string>> ThemDungTichSP(ThongTinThemSanPham value, int userId, int productId)
+        //{
+        //    try
+        //    {
+        //        var result = await _infoProductService.ThemDungTich(value, userId, productId);
+        //        if (result != true)
+        //        {
+        //            return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm thất bại", null);
+        //        }
+        //        return new ResponseResult<string>(RetCodeEnum.Ok, "Thêm thành công", result.ToString());
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+        //    }
+        //}
     }
 }

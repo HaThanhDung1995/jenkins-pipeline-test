@@ -25,6 +25,11 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         //danh sách hình ảnh
         public List<string> ListImage { get; set; }
         //danh sách dung tích
-        public List<int> ListCapacity { get; set; }
+        public List<GiaTheoDungTichThem> ListCapacityPrice { get; set; }
+    }
+    public class GiaTheoDungTichThem
+    {
+        public int? Cappacity { get; set; }
+        public int? Price { get; set; }
     }
 }
