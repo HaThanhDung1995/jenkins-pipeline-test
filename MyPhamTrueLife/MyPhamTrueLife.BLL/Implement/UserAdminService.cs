@@ -122,173 +122,51 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 return false;
             }
-            var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true).OrderByDescending(z => z.CreateAt).AsNoTracking().ToListAsync();
-            if (infoCalenda == null || infoCalenda.Count <= 0)
-            {
-                var date = DateTime.Now;
-                int month = date.Month;
-                int year = date.Year;
-                var infoCalendaInsert = new InfoCalendar();
-                infoCalendaInsert.MonthI = month;
-                infoCalendaInsert.YearI = year;
-                infoCalendaInsert.CreateAt = DateTime.Now;
-                infoCalendaInsert.CreateUser = userId;
-                infoCalendaInsert.DeleteFlag = false;
-                var relsut = await _unitOfWork.Repository<InfoCalendar>().AddAsync(infoCalendaInsert);
-                await _unitOfWork.SaveChangeAsync();
-                //Thêm từng ca
-                //ca 1
-                var infoDetailCalenda1 = new InfoDetailCalendar();
-                infoDetailCalenda1.CalendarId = relsut.Entity.CalendarId;
-                infoDetailCalenda1.DayI = date.Day;
-                infoDetailCalenda1.ShiftI = 1;
-                infoDetailCalenda1.StaffId = 1;
-                infoDetailCalenda1.CreateAt = DateTime.Now;
-                infoDetailCalenda1.CreateUser = userId;
-                infoDetailCalenda1.DeleteFlag = false;
-                await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda1);
-                await _unitOfWork.SaveChangeAsync();
-                //_unitOfWork.SaveChange();
-                //ca 2
-                var infoDetailCalenda2 = new InfoDetailCalendar();
-                infoDetailCalenda2.CalendarId = relsut.Entity.CalendarId;
-                infoDetailCalenda2.DayI = date.Day;
-                infoDetailCalenda2.ShiftI = 2;
-                infoDetailCalenda2.StaffId = 1;
-                infoDetailCalenda2.CreateAt = DateTime.Now;
-                infoDetailCalenda2.CreateUser = userId;
-                infoDetailCalenda2.DeleteFlag = false;
-                await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda2);
-                await _unitOfWork.SaveChangeAsync();
-                //_unitOfWork.SaveChange();
-                for (int i = 0; i < 14; i++)
-                {
-                    date.AddDays(1);
-                    if (date.Month != month || date.Year != year)
-                    {
-                        var infoCalendaInsert1 = new InfoCalendar();
-                        infoCalendaInsert1.MonthI = date.Month;
-                        infoCalendaInsert1.YearI = date.Year;
-                        infoCalendaInsert1.CreateAt = DateTime.Now;
-                        infoCalendaInsert1.CreateUser = userId;
-                        infoCalendaInsert1.DeleteFlag = false;
-                        relsut = await _unitOfWork.Repository<InfoCalendar>().AddAsync(infoCalendaInsert1);
-                        await _unitOfWork.SaveChangeAsync();
-                        month = date.Month;
-                        year = date.Year;
-                    }
-                    else
-                    {
-                        //Thêm từng ca
-                        //ca 1
-                        var infoDetailCalenda3 = new InfoDetailCalendar();
-                        infoDetailCalenda3.CalendarId = relsut.Entity.CalendarId;
-                        infoDetailCalenda3.DayI = date.Day;
-                        infoDetailCalenda3.ShiftI = 1;
-                        infoDetailCalenda3.StaffId = 1;
-                        infoDetailCalenda3.CreateAt = DateTime.Now;
-                        infoDetailCalenda3.CreateUser = userId;
-                        infoDetailCalenda3.DeleteFlag = false;
-                        await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda3);
-                        await _unitOfWork.SaveChangeAsync();
-                        //ca 2
-                        var infoDetailCalenda4 = new InfoDetailCalendar();
-                        infoDetailCalenda4.CalendarId = relsut.Entity.CalendarId;
-                        infoDetailCalenda4.DayI = date.Day;
-                        infoDetailCalenda4.ShiftI = 2;
-                        infoDetailCalenda4.StaffId = 1;
-                        infoDetailCalenda4.CreateAt = DateTime.Now;
-                        infoDetailCalenda4.CreateUser = userId;
-                        infoDetailCalenda4.DeleteFlag = false;
-                        await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda4);
-                        await _unitOfWork.SaveChangeAsync();
-                    }
-                }
-            }
-            else
-            {
-                var date = infoCalenda.FirstOrDefault();
-                var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.CalendarId == date.CalendarId).OrderByDescending(z=>z.DayI).AsNoTracking().FirstOrDefaultAsync();
-                DateTime date1 = new DateTime(date.YearI.Value, date.MonthI.Value, infoDetail.DayI, 1,1,1);
-                int month = date1.Month;
-                int year = date1.Year;
-                var infoCalendaInsert = new InfoCalendar();
-                infoCalendaInsert.MonthI = month;
-                infoCalendaInsert.YearI = year;
-                infoCalendaInsert.CreateAt = DateTime.Now;
-                infoCalendaInsert.CreateUser = userId;
-                infoCalendaInsert.DeleteFlag = false;
-                var relsut = await _unitOfWork.Repository<InfoCalendar>().AddAsync(infoCalendaInsert);
-                await _unitOfWork.SaveChangeAsync();
-                //Thêm từng ca
-                //ca 1
-                var infoDetailCalenda1 = new InfoDetailCalendar();
-                infoDetailCalenda1.CalendarId = relsut.Entity.CalendarId;
-                infoDetailCalenda1.DayI = date1.Day;
-                infoDetailCalenda1.ShiftI = 1;
-                infoDetailCalenda1.StaffId = 1;
-                infoDetailCalenda1.CreateAt = DateTime.Now;
-                infoDetailCalenda1.CreateUser = userId;
-                infoDetailCalenda1.DeleteFlag = false;
-                await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda1);
-                await _unitOfWork.SaveChangeAsync();
-                //ca 2
-                var infoDetailCalenda2 = new InfoDetailCalendar();
-                infoDetailCalenda2.CalendarId = relsut.Entity.CalendarId;
-                infoDetailCalenda2.DayI = date1.Day;
-                infoDetailCalenda2.ShiftI = 2;
-                infoDetailCalenda2.StaffId = 1;
-                infoDetailCalenda2.CreateAt = DateTime.Now;
-                infoDetailCalenda2.CreateUser = userId;
-                infoDetailCalenda2.DeleteFlag = false;
-                await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda2);
-                await _unitOfWork.SaveChangeAsync();
-                for (int i = 0; i < 14; i++)
-                {
-                    date1.AddDays(1);
-                    if (date1.Month != month || date1.Year != year)
-                    {
-                        var infoCalendaInsert1 = new InfoCalendar();
-                        infoCalendaInsert1.MonthI = date1.Month;
-                        infoCalendaInsert1.YearI = date1.Year;
-                        infoCalendaInsert1.CreateAt = DateTime.Now;
-                        infoCalendaInsert1.CreateUser = userId;
-                        infoCalendaInsert1.DeleteFlag = false;
-                        relsut = await _unitOfWork.Repository<InfoCalendar>().AddAsync(infoCalendaInsert1);
-                        await _unitOfWork.SaveChangeAsync();
-                        month = date1.Month;
-                        year = date1.Year;
-                    }
-                    else
-                    {
-                        //Thêm từng ca
-                        //ca 1
-                        var infoDetailCalenda3 = new InfoDetailCalendar();
-                        infoDetailCalenda3.CalendarId = relsut.Entity.CalendarId;
-                        infoDetailCalenda3.DayI = date1.Day;
-                        infoDetailCalenda3.ShiftI = 1;
-                        infoDetailCalenda3.StaffId = 1;
-                        infoDetailCalenda3.CreateAt = DateTime.Now;
-                        infoDetailCalenda3.CreateUser = userId;
-                        infoDetailCalenda3.DeleteFlag = false;
-                        await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda3);
-                        await _unitOfWork.SaveChangeAsync();
-                        //ca 2
-                        var infoDetailCalenda4 = new InfoDetailCalendar();
-                        infoDetailCalenda4.CalendarId = relsut.Entity.CalendarId;
-                        infoDetailCalenda4.DayI = date1.Day;
-                        infoDetailCalenda4.ShiftI = 2;
-                        infoDetailCalenda4.StaffId = 1;
-                        infoDetailCalenda4.CreateAt = DateTime.Now;
-                        infoDetailCalenda4.CreateUser = userId;
-                        infoDetailCalenda4.DeleteFlag = false;
-                        await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda4);
-                        await _unitOfWork.SaveChangeAsync();
-                    }
-                }
+            var date = DateTime.Now;
+            int month = date.Month;
+            int year = date.Year;
+            //Tất cả ngày trong tháng
+            var tmp = DateTime.DaysInMonth(date.Year, date.Month);
 
+
+            var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.YearI == year && x.MonthI == month).AsNoTracking().FirstOrDefaultAsync();
+            if (infoCalenda == null)
+            {
+                var infoCalendaInsert = new InfoCalendar();
+                infoCalendaInsert.MonthI = month;
+                infoCalendaInsert.YearI = year;
+                infoCalendaInsert.CreateAt = DateTime.Now;
+                infoCalendaInsert.CreateUser = userId;
+                infoCalendaInsert.DeleteFlag = false;
+                var result = await _unitOfWork.Repository<InfoCalendar>().AddAsync(infoCalendaInsert);
+                await _unitOfWork.SaveChangesAsync();
+
+                for (int i = 1; i <= tmp; i++)
+                {
+                    var infoDetailCalenda = new InfoDetailCalendar();
+                    infoDetailCalenda.CalendarId = infoCalendaInsert.CalendarId;
+                    infoDetailCalenda.DayI = i;
+                    infoDetailCalenda.ShiftI = 1;
+                    infoDetailCalenda.StaffId = 1;
+                    infoDetailCalenda.CreateAt = DateTime.Now;
+                    infoDetailCalenda.CreateUser = userId;
+                    infoDetailCalenda.DeleteFlag = false;
+                    await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda);
+                    await _unitOfWork.SaveChangesAsync();
+
+                    var infoDetailCalenda1 = new InfoDetailCalendar();
+                    infoDetailCalenda1.CalendarId = infoCalendaInsert.CalendarId;
+                    infoDetailCalenda1.DayI = i;
+                    infoDetailCalenda1.ShiftI = 2;
+                    infoDetailCalenda1.StaffId = 1;
+                    infoDetailCalenda1.CreateAt = DateTime.Now;
+                    infoDetailCalenda1.CreateUser = userId;
+                    infoDetailCalenda1.DeleteFlag = false;
+                    await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda1);
+                    await _unitOfWork.SaveChangesAsync();
+                }
             }
-            _unitOfWork.SaveChange();
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
     }

@@ -243,12 +243,10 @@ namespace MyPhamTrueLife.DAL.Models1
 
             modelBuilder.Entity<InfoDetailCalendar>(entity =>
             {
-                entity.HasKey(e => new { e.CalendarId, e.DayI, e.StaffId, e.ShiftI })
-                    .HasName("PK__info_det__1F88709EC3D9C78A");
+                entity.HasKey(e => e.DetailCalendarId)
+                    .HasName("PK__info_det__3E3148781185F87D");
 
                 entity.ToTable("info_detail_calendar");
-
-                entity.Property(e => e.CalendarId).ValueGeneratedOnAdd();
 
                 entity.Property(e => e.CreateAt).HasColumnType("datetime");
 
@@ -261,13 +259,11 @@ namespace MyPhamTrueLife.DAL.Models1
                 entity.HasOne(d => d.Calendar)
                     .WithMany(p => p.InfoDetailCalendars)
                     .HasForeignKey(d => d.CalendarId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_detail_calendar_calendar");
 
                 entity.HasOne(d => d.Staff)
                     .WithMany(p => p.InfoDetailCalendars)
                     .HasForeignKey(d => d.StaffId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_detail_calendar_staff");
             });
 

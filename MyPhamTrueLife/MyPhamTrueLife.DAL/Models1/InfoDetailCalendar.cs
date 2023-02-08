@@ -7,10 +7,11 @@ namespace MyPhamTrueLife.DAL.Models1
 {
     public partial class InfoDetailCalendar
     {
-        public int CalendarId { get; set; }
-        public int DayI { get; set; }
-        public int ShiftI { get; set; }
-        public int StaffId { get; set; }
+        public int DetailCalendarId { get; set; }
+        public int? CalendarId { get; set; }
+        public int? DayI { get; set; }
+        public int? ShiftI { get; set; }
+        public int? StaffId { get; set; }
         public bool? IsDo { get; set; }
         public DateTime? StartAt { get; set; }
         public DateTime? EndAt { get; set; }
