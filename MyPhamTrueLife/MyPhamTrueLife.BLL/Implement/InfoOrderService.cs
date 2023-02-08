@@ -65,7 +65,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     cart.CapacityId = item.CapacityId;
                     if (item.Capacity != null)
                     {
-                        var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.CapacityId.Equals(item.Capacity)).OrderByDescending(z => z.StartAt).AsNoTracking().ToListAsync();
+                        var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId && x.CapacityId.Equals(item.Capacity)).OrderByDescending(z => z.StartAt).AsNoTracking().ToListAsync();
                         if (product != null && product.Count > 0)
                         {
                             cart.Prize = product[0].Price;
@@ -73,7 +73,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     }
                     else
                     {
-                        var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true).OrderByDescending(z => z.StartAt).AsNoTracking().ToListAsync();
+                        var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).OrderByDescending(z => z.StartAt).AsNoTracking().ToListAsync();
                         if (product != null && product.Count > 0)
                         {
                             cart.Prize = product[0].Price;
@@ -85,7 +85,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     {
                         if (item.Capacity != null)
                         {
-                            var expiry = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.Amount > item.Quantity && x.CapacityId.Equals(item.CapacityId)).OrderBy(z => z.StartAt).AsNoTracking().ToListAsync();
+                            var expiry = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId && x.Amount > item.Quantity && x.CapacityId.Equals(item.CapacityId)).OrderBy(z => z.StartAt).AsNoTracking().ToListAsync();
                             if (expiry != null && expiry.Count > 0)
                             {
                                 cart.StartAt = expiry[0].StartAt;
@@ -94,7 +94,7 @@ namespace MyPhamTrueLife.BLL.Implement
                         }
                         if (item.Capacity == null)
                         {
-                            var expiry = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.Amount > item.Quantity).OrderBy(z => z.StartAt).AsNoTracking().ToListAsync();
+                            var expiry = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId && x.Amount > item.Quantity).OrderBy(z => z.StartAt).AsNoTracking().ToListAsync();
                             if (expiry != null && expiry.Count > 0)
                             {
                                 cart.StartAt = expiry[0].StartAt;
