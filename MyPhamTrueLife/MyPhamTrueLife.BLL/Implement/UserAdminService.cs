@@ -169,5 +169,94 @@ namespace MyPhamTrueLife.BLL.Implement
             await _unitOfWork.SaveChangesAsync();
             return true;
         }
+
+        public async Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt)
+        {
+            var listInfo = new List<LichTaoViecChoAdmin>();
+            if (dateAt == null) dateAt = DateTime.Now;
+            var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
+            if (infoCalenda == null)
+            {
+                return listInfo;
+            }
+            var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
+            for (int i = 1; i <= tmp; i++)
+            {
+                var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
+                if (infoDetail != null && infoDetail.Count > 0)
+                {
+                    var info = new LichTaoViecChoAdmin();
+                    info.infoDetailCalendar = infoDetail.FirstOrDefault();
+                    if (infoDetail.Count >= 5)
+                    {
+                        info.Status = true;
+                    }
+                    else
+                    {
+                        info.Status = false;
+                    }
+                    listInfo.Add(info);
+                }
+            }
+            return listInfo;
+        }
+
+        public async Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId)
+        {
+            if (value == null)
+            {
+                return 1;
+            }
+            var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId).AsNoTracking().FirstOrDefaultAsync();
+            if (infoStaff == null)
+            {
+                return 2;
+            }
+            var listInfoStaffId = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff.PositionStaffId).AsNoTracking().Select(z => z.StaffId).ToListAsync();
+            var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && listInfoStaffId.Contains(x.StaffId.Value)).AsNoTracking().CountAsync();
+            if (infoStaff.PositionStaffId == 3)
+            {
+                //Nhân viên bán hàng
+                if (infoDetailCalendar == 2)
+                {
+                    return -1;
+                }
+            }
+            if (infoStaff.PositionStaffId == 5)
+            {
+                //Nhân viên kho
+                if (infoDetailCalendar == 2)
+                {
+                    return -1;
+                }
+            }
+            if (infoStaff.PositionStaffId == 6)
+            {
+                //Thu ngân
+                if (infoDetailCalendar == 1)
+                {
+                    return -1;
+                }
+            }
+            var infoDetailCalenda1 = new InfoDetailCalendar();
+            infoDetailCalenda1.CalendarId = value.CalendarId;
+            infoDetailCalenda1.DayI = value.DayI;
+            infoDetailCalenda1.ShiftI = value.ShiftI;
+            infoDetailCalenda1.StaffId = value.StaffId;
+            infoDetailCalenda1.CreateAt = DateTime.Now;
+            infoDetailCalenda1.CreateUser = staffId;
+            infoDetailCalenda1.DeleteFlag = false;
+            await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda1);
+            await _unitOfWork.SaveChangesAsync();
+            var infoDetailCalenda1r = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == x.ShiftI).AsNoTracking().CountAsync();
+            if (infoDetailCalenda1r >= 5)
+            {
+                var infoDetailCalenda1r1 = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == x.ShiftI && x.StaffId == 1).AsNoTracking().FirstOrDefaultAsync();
+                infoDetailCalenda1r1.DeleteFlag = true;
+                _unitOfWork.Repository<InfoDetailCalendar>().UpdateRange(infoDetailCalenda1r1);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            return 0;
+        }
     }
 }

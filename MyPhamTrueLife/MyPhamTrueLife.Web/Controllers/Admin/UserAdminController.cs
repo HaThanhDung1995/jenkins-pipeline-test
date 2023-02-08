@@ -74,8 +74,51 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Tạo lịch làm việc thất bại", null);
                 }
-                //result.Token = CreateToken(result);
                 return new ResponseResult<string>(RetCodeEnum.Ok, "Tạo lịch làm việc thành công", result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [HttpPost]
+        [Route("lay-lich-lam-viec-admin")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<List<LichTaoViecChoAdmin>>> LayLichLamViecAdmin(DateTime? dateTime)
+        {
+            try
+            {
+                var result = await _userAdmin.LayLichLamDeDangKy(dateTime);
+                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [HttpPost]
+        [Route("dang-ky-lich-lam-viec-admin")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> DangKyLichLamViecAdmin(InfoDetailCalendar value, int staffId)
+        {
+            try
+            {
+                var result = await _userAdmin.DangKyLichLamViecCuaNhanVien(value, staffId);
+                if (result == 1)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, thông tin truyền vào bị trống", result.ToString());
+                }
+                if (result == 2)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, thông tin truyền vào bị trống", result.ToString());
+                }
+                if (result == -1)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, loại nhân viên đã đủ cho ca làm việc", result.ToString());
+                }
+                return new ResponseResult<string>(RetCodeEnum.Ok, "Đăng ký lịch làm việc thành công", result.ToString());
             }
             catch (Exception ex)
             {

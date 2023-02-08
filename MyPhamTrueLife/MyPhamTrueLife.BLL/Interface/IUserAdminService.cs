@@ -15,6 +15,9 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<InfoStaff> DetailStaff(int userId);
         Task<ResponseList> ListStaff(int page = 1, int limit = 25);
         Task<LoginResponse> LoginAsync(Login value);
+        //Phần nhiệm vụ
         Task<bool> TaoLichLamViec(int userId);
+        Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt);
+        Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId);
     }
 }

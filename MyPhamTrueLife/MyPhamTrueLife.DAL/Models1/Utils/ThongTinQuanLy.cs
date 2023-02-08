@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPhamTrueLife.DAL.Models1;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,5 +32,11 @@ namespace MyPhamTrueLife.DAL.Models.Utils
     {
         public int? Cappacity { get; set; }
         public int? Price { get; set; }
+    }
+
+    public class LichTaoViecChoAdmin
+    {
+        public InfoDetailCalendar infoDetailCalendar { get; set; }
+        public bool? Status { get; set; }
     }
 }
