@@ -266,8 +266,8 @@ namespace MyPhamTrueLife.BLL.Implement
             var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId).AsNoTracking().FirstOrDefaultAsync();
             if (infoStaff != null)
             {
-                var staff = new InfoStaffReq();
-                PropertyCopier<InfoStaff, InfoStaffReq>.Copy(infoStaff, staff);
+                var staff = new InfoStaffReqNew();
+                PropertyCopier<InfoStaff, InfoStaffReqNew>.Copy(infoStaff, staff);
                 if (dateAt == null)
                 {
                     dateAt = DateTime.Now;
