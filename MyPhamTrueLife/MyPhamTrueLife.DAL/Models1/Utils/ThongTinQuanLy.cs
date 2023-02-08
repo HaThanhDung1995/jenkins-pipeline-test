@@ -50,10 +50,10 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public bool? IsDo { get; set; }
         public DateTime? StartAt { get; set; }
         public DateTime? EndAt { get; set; }
-        public InfoStaffReq infoStaffReq { get; set; }
+        public InfoStaffReqNew infoStaffReq { get; set; }
     }
 
-    public class InfoStaffReq
+    public class InfoStaffReqNew
     {
         public int StaffId { get; set; }
         public string StaffName { get; set; }

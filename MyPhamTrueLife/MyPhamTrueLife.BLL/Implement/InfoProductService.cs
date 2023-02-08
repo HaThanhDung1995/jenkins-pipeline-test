@@ -178,83 +178,32 @@ namespace MyPhamTrueLife.BLL.Implement
             return true;
         }
 
-        //public async Task<bool> ThemHinhAnh(ThongTinThemSanPham value, int userId, int ptoductId)
-        //{
-            
-        //    //await _unitOfWork.SaveChangesAsync();
-        //    //await _unitOfWork.DisposeAsync();
-        //    await _unitOfWork.SaveChangesAsync();
-        //    return true;
-        //}
+        public async Task<ProductDetailAdmin> ProductDetailAsync(int id)
+        {
+            var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == id).AsNoTracking().FirstOrDefaultAsync();
+            if (product == null)
+            {
+                return null;
+            }
+            var info = new ProductDetailAdmin();
+            info.ProductId = product.ProductId;
+            info.ProductName = product.ProductName;
+            info.Price = product.ProductId;
+            info.PriceDiscount = product.ProductId;
+            info.Trademark = product.Trademark;
+            info.StatusProduct = product.StatusProduct;
+            info.NatureId = product.NatureId;
+            info.Describe = product.Describe;
+            if (product.NatureId != null)
+            {
+                info.NatureName = await _unitOfWork.Repository<InfoNature>().Where(x => x.DeleteFlag != true && x.NatureId == product.NatureId).AsNoTracking().Select(z=>z.NatureName).FirstOrDefaultAsync();
+            }
+            info.listImage = await _unitOfWork.Repository<InfoImageProduct>().Where(x=>x.DeleteFlag != true && x.ProductId == product.ProductId).AsNoTracking().ToListAsync();
+            info.listInfoExpiryProducts = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == product.ProductId).AsNoTracking().ToListAsync();
+            var list = new List<CapacityProductRes>();
+            //info.listCapacityProductRes = product.ProductId;
 
-        //public async Task<bool> ThemGia(ThongTinThemSanPham value, int userId, int ptoductId)
-        //{
-        //    var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == ptoductId).AsNoTracking().FirstOrDefaultAsync();
-        //    if (value.ListCapacity != null)
-        //    {
-        //        foreach (var capacityId in value.ListCapacity)
-        //        {
-        //            var infoPriceProduct = new InfoPriceProduct();
-        //            infoPriceProduct.PriceProductId = 0;
-        //            infoPriceProduct.ProductId = ptoductId;
-        //            //infoPriceProduct.Product = product;
-        //            infoPriceProduct.Price = value.Price;
-        //            infoPriceProduct.CreateUser = userId;
-        //            infoPriceProduct.CreateAt = DateTime.Now;
-        //            infoPriceProduct.DeleteFlag = false;
-        //            infoPriceProduct.StartAt = DateTime.Now;
-        //            infoPriceProduct.CapacityId = capacityId;
-        //            await _unitOfWork.Repository<InfoPriceProduct>().AddAsync(infoPriceProduct);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        var infoPriceProduct = new InfoPriceProduct();
-        //        infoPriceProduct.ProductId = ptoductId;
-        //        infoPriceProduct.PriceProductId = 0;
-        //        //infoPriceProduct.Product = product;
-        //        infoPriceProduct.Price = value.Price;
-        //        infoPriceProduct.CreateUser = userId;
-        //        infoPriceProduct.CreateAt = DateTime.Now;
-        //        infoPriceProduct.DeleteFlag = false;
-        //        infoPriceProduct.StartAt = DateTime.Now;
-        //        var reselt = await _unitOfWork.Repository<InfoPriceProduct>().AddAsync(infoPriceProduct);
-        //    }
-        //    await _unitOfWork.SaveChangeAsync();
-        //    return true;
-        //}
-
-        //public async Task<bool> ThemDungTich(ThongTinThemSanPham value, int userId, int ptoductId)
-        //{
-        //    if (value.ListCapacity != null)
-        //    {
-        //        foreach (var capacityId in value.ListCapacity)
-        //        {
-        //            var infoCapacityProduct = new InfoCapacityProduct();
-        //            infoCapacityProduct.ProductId = ptoductId;
-        //            infoCapacityProduct.CapacityId = capacityId;
-        //            infoCapacityProduct.CreateUser = userId;
-        //            infoCapacityProduct.CreateAt = DateTime.Now;
-        //            infoCapacityProduct.DeleteFlag = false;
-        //            await _unitOfWork.Repository<InfoCapacityProduct>().AddAsync(infoCapacityProduct);
-
-        //            if (value.IsExpiry == true)
-        //            {
-        //                var infoExpiry = new InfoExpiryProduct();
-        //                infoExpiry.ProductId = ptoductId;
-        //                infoExpiry.CapacityId = capacityId;
-        //                infoExpiry.StartAt = value.StartAt;
-        //                infoExpiry.EndAt = value.EndAt;
-        //                infoExpiry.Amount = 0;
-        //                infoExpiry.CreateUser = userId;
-        //                infoExpiry.CreateAt = DateTime.Now;
-        //                infoExpiry.DeleteFlag = false;
-        //                await _unitOfWork.Repository<InfoExpiryProduct>().AddAsync(infoExpiry);
-        //            }
-        //        }
-        //    }
-        //    await _unitOfWork.SaveChangesAsync();
-        //    return true;
-        //}
+            return info;
+        }
     }
 }

@@ -54,7 +54,8 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public int? PriceDiscount { get; set; }
         public string Trademark { get; set; }
         public string StatusProduct { get; set; }
-        public List<InfoNature> listNature { get; set; }
+        public int? NatureId { get; set; }
+        public string NatureName { get; set; }
         public List<InfoCapacity> listCapacity { get; set; }
         public string Describe { get; set; }
         public List<string> listImage { get; set; }
@@ -62,5 +63,31 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public List<InfoComent> listComent { get; set; }
         public List<InfoEvaluate> listEvaluate { get; set; }
         public int? QuantityOrder { get; set; }
+    }
+
+    public class ProductDetailAdmin
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public int? Price { get; set; }
+        public int? PriceDiscount { get; set; }
+        public string Trademark { get; set; }
+        public string StatusProduct { get; set; }
+        public int? NatureId { get; set; }
+        public string NatureName { get; set; }
+        public List<CapacityProductRes> listCapacityProductRes { get; set; }
+        public string Describe { get; set; }
+        public List<InfoImageProduct> listImage { get; set; }
+        public List<InfoExpiryProduct> listInfoExpiryProducts { get; set; }
+    }
+
+    public class CapacityProductRes
+    {
+        public int CapacityId { get; set; }
+        public string CapacityName { get; set; }
+        public string Unit { get; set; }
+
+        public int PriceProductId { get; set; }
+        public int? Price { get; set; }
     }
 }
