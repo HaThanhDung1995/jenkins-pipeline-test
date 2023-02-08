@@ -125,5 +125,21 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [HttpPost]
+        [Route("lay-lich-lam-viec-cho-nhan-vien")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<List<LichLamViecCuaNhanVien>>> LayLichLamViecChoNhanVien(int staffId, DateTime? dateAt)
+        {
+            try
+            {
+                var result = await _userAdmin.LayLichLamCuaNhanVien(staffId, dateAt);
+                return new ResponseResult<List<LichLamViecCuaNhanVien>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<List<LichLamViecCuaNhanVien>>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }

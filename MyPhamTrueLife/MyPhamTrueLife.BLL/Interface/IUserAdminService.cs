@@ -19,5 +19,6 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<bool> TaoLichLamViec(int userId);
         Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt);
         Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId);
+        Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, DateTime? dateAt);
     }
 }

@@ -7,10 +7,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
-    public class UserAdminService: IUserAdminService
+    public class UserAdminService : IUserAdminService
     {
         public readonly dbDevNewContext _unitOfWork;
         public UserAdminService(dbDevNewContext unitOfWork)
@@ -257,6 +258,49 @@ namespace MyPhamTrueLife.BLL.Implement
                 await _unitOfWork.SaveChangesAsync();
             }
             return 0;
+        }
+
+        public async Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, DateTime? dateAt)
+        {
+            var listInfo = new List<LichLamViecCuaNhanVien>();
+            var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId).AsNoTracking().FirstOrDefaultAsync();
+            if (infoStaff != null)
+            {
+                var staff = new InfoStaffReq();
+                PropertyCopier<InfoStaff, InfoStaffReq>.Copy(infoStaff, staff);
+                if (dateAt == null)
+                {
+                    dateAt = DateTime.Now;
+                }
+                var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
+                var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
+
+                if (infoCalenda != null)
+                {
+                    for (int i = 1; i <= tmp; i++)
+                    {
+                        var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
+                        if (infoDetail != null && infoDetail.Count > 0)
+                        {
+                            foreach (var item in infoDetail)
+                            {
+                                var info = new LichLamViecCuaNhanVien();
+                                info.infoStaffReq = staff;
+                                info.DetailCalendarId = item.DetailCalendarId;
+                                info.CalendarId = item.CalendarId;
+                                info.DayI = item.DayI;
+                                info.ShiftI = item.ShiftI;
+                                info.StaffId = item.StaffId;
+                                info.IsDo = item.IsDo;
+                                info.StartAt = item.StartAt;
+                                info.EndAt = item.EndAt;
+                                listInfo.Add(info);
+                            }
+                        }
+                    }
+                }
+            }
+            return listInfo;
         }
     }
 }
