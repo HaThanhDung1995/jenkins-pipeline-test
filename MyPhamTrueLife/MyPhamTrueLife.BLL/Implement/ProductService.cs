@@ -190,7 +190,6 @@ namespace MyPhamTrueLife.BLL.Implement
                 }
                 if (listProduct != null && listProduct.Count > 0)
                 {
-                    var promotion = await _unitOfWork.Repository<InfoPromotion>().Where(x => x.DeleteFlag != true && x.StartAt <= DateTime.Now && x.EndAt >= DateTime.Now).AsNoTracking().FirstOrDefaultAsync();
                     foreach (var item in listProduct)
                     {
                         var product = new ListProductSelling();
@@ -202,24 +201,6 @@ namespace MyPhamTrueLife.BLL.Implement
                             product.ProductId = item.ProductId;
                             product.Avatar = item.Avatar;
                             product.PriceDiscount = product.Price;
-                            if (promotion != null)
-                            {
-                                var promotionDetail = await _unitOfWork.Repository<InfoPromotionDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().FirstOrDefaultAsync();
-                                if (promotionDetail != null)
-                                {
-                                    int? priceMax = listPrice[0].Price;
-                                    if (promotionDetail.DiscountAmount != null && promotionDetail.DiscountAmount >= 0)
-                                    {
-                                        priceMax = priceMax - promotionDetail.DiscountAmount;
-
-                                    }
-                                    if (promotionDetail.DiscountPercent != null && promotionDetail.DiscountPercent >= 0)
-                                    {
-                                        priceMax = priceMax - ((priceMax * promotionDetail.DiscountAmount) / 100);
-                                    }
-                                    product.PriceDiscount = priceMax.Value;
-                                }
-                            }
                             listProductSeling.Add(product);
                         }
                     }
