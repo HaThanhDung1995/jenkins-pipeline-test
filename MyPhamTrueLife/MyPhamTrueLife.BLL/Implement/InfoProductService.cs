@@ -187,7 +187,8 @@ namespace MyPhamTrueLife.BLL.Implement
             var info = new ProductDetailAdmin();
             info.ProductId = product.ProductId;
             info.ProductName = product.ProductName;
-            info.Avatar = product.Avatar;                                                                                       
+            info.Avatar = product.Avatar;
+            info.IsExpiry = product.IsExpiry;
             info.PriceDiscount = product.ProductId;
             info.Trademark = product.Trademark;
             info.StatusProduct = product.StatusProduct;
