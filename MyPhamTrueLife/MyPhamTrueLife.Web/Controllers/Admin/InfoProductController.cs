@@ -108,6 +108,26 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [Route("xem-chi-tiet-san-pham")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ResponseResult<ProductDetailAdmin>> XemChiTietSanPham(int id)
+        {
+            try
+            {
+                var result = await _infoProductService.ProductDetailAsync(id);
+                if (result == null)
+                {
+                    return new ResponseResult<ProductDetailAdmin>(RetCodeEnum.ApiError, "Chi tiết sản phẩm.", null);
+                }
+                return new ResponseResult<ProductDetailAdmin>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<ProductDetailAdmin>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
         //[Route("them-hinh-anh-san-pham")]
         //[HttpPost]
         //[AllowAnonymous]

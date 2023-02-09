@@ -201,8 +201,30 @@ namespace MyPhamTrueLife.BLL.Implement
             info.listImage = await _unitOfWork.Repository<InfoImageProduct>().Where(x=>x.DeleteFlag != true && x.ProductId == product.ProductId).AsNoTracking().ToListAsync();
             info.listInfoExpiryProducts = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == product.ProductId).AsNoTracking().ToListAsync();
             var list = new List<CapacityProductRes>();
-            //info.listCapacityProductRes = product.ProductId;
 
+            var listCapaCity = await _unitOfWork.Repository<InfoCapacityProduct>().Where(x => x.DeleteFlag != true && x.ProductId == product.ProductId).AsNoTracking().ToListAsync();
+            if (listCapaCity != null && list.Count > 0)
+            {
+                foreach (var item in listCapaCity)
+                {
+                    var capacity = await _unitOfWork.Repository<InfoCapacity>().Where(x => x.DeleteFlag != true && x.CapacityId == item.CapacityId).AsNoTracking().FirstOrDefaultAsync();
+                    if (capacity != null)
+                    {
+                        var inf = new CapacityProductRes();
+                        inf.CapacityId = capacity.CapacityId;
+                        inf.CapacityName = capacity.CapacityName;
+                        inf.Unit = capacity.Unit;
+                        var priceProduct = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.CapacityId == capacity.CapacityId).OrderByDescending(z => z.StartAt).AsNoTracking().FirstOrDefaultAsync();
+                        if (priceProduct != null)
+                        {
+                            inf.PriceProductId = priceProduct.PriceProductId;
+                            inf.Price = priceProduct.Price;
+                        }
+                        list.Add(inf);
+                    }    
+                }
+            }
+            info.listCapacityProductRes = list;
             return info;
         }
     }
