@@ -62,5 +62,24 @@ namespace MyPhamTrueLife.BLL.Implement
             listData.ListData = listInfoImportSell;
             return listData;
         }
+
+        public async Task<bool> ThemDanhSachChiTietNhapHang(List<InfoDetailImportSell> value, int staffId, int importSellId)
+        {
+            var supplier = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId.Equals(importSellId)).AsNoTracking().FirstOrDefaultAsync();
+            if (supplier != null)
+            {
+                foreach (var item in value)
+                {
+                    item.ImportSellId = importSellId;
+                    item.CreateAt = DateTime.Now;
+                    item.CreateUser = staffId;
+                    item.DeleteFlag = false;
+                    await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(item);
+                }
+                await _unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }

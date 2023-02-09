@@ -73,5 +73,21 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [Route("them-danh-sach-chi-tiet-nhap-hang")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> Post1([FromBody] List<InfoDetailImportSell> value, int userId, int importSellId)
+        {
+            try
+            {
+                var result = await _importSellService.ThemDanhSachChiTietNhapHang(value, userId, importSellId);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }
