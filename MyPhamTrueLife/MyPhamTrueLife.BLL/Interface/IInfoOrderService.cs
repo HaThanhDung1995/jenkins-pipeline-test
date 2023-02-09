@@ -12,5 +12,7 @@ namespace MyPhamTrueLife.BLL.Interface
         //getlisst admin
         Task<ResponseList> GetListOrderAdminAsync(int page = 1, int limit = 25);
         Task<bool> UpdateOrderAsync(InfoOrderUpdateStatus value);
+
+        Task<XemChiTietDonHangRes> XemChiTietDonHang(int orderId);
     }
 }

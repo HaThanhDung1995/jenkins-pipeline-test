@@ -71,5 +71,22 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [Route("xem-chi-tiet-don-hang")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ResponseResult<XemChiTietDonHangRes>> Detail(int orderId)
+        {
+            try
+            {
+                //int currentUserId = GetCurrentUserId();
+                var result = await _infoOrderService.XemChiTietDonHang(orderId);
+                return new ResponseResult<XemChiTietDonHangRes>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<XemChiTietDonHangRes>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }

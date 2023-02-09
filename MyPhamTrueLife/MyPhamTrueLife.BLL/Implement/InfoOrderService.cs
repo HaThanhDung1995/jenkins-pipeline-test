@@ -172,5 +172,63 @@ namespace MyPhamTrueLife.BLL.Implement
             await _unitOfWork.SaveChangeAsync();
             return true;
         }
+
+        public async Task<XemChiTietDonHangRes> XemChiTietDonHang(int orderId)
+        {
+            var order = await _unitOfWork.Repository<InfoOrder>().Where(x => x.DeleteFlag != true && x.OrderId == orderId).AsNoTracking().FirstOrDefaultAsync();
+            if (order != null)
+            {
+                var info = new XemChiTietDonHangRes();
+                info.OrderId = order.OrderId;
+                info.UserId = order.UserId;
+                info.IsAccept = order.IsAccept;
+                info.StaffId = order.StaffId;
+                info.Total = order.Total;
+                info.Status = order.Status;
+                info.IsPay = order.IsPay;
+                info.StatusOrder = order.StatusOrder;
+                info.SeverId = order.SeverId;
+                info.DateTimeD = order.DateTimeD;
+                info.AddressDeliveryId = order.AddressDeliveryId;
+
+                info.infoUser = order.UserId == null ? null : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == order.UserId).AsNoTracking().FirstOrDefaultAsync();
+                info.infoStaff = order.StaffId == null ? null : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == order.StaffId).AsNoTracking().FirstOrDefaultAsync();
+                info.infoSever = order.SeverId == null ? null : await _unitOfWork.Repository<InfoSever>().Where(x => x.DeleteFlag != true && x.SeverId == order.SeverId).AsNoTracking().FirstOrDefaultAsync();
+                info.infoAddressDeliveryUser = order.AddressDeliveryId == null ? null : await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.AddressDeliveryId == order.AddressDeliveryId.Value).AsNoTracking().FirstOrDefaultAsync();
+
+                info.thongTinChiTietDonHangs = new List<ThongTinChiTietDonHang>();
+                var detailOrder = await _unitOfWork.Repository<InfoOrderDetail>().Where(x => x.DeleteFlag != true && x.OrderId == order.OrderId).AsNoTracking().ToListAsync();
+                foreach (var item in detailOrder)
+                {
+                    var info1 = new ThongTinChiTietDonHang();
+                    info1.OrderId = item.OrderId;
+                    info1.ProductId = item.ProductId;
+                    info1.Amount = item.Amount;
+                    info1.Prize = item.Prize;
+                    info1.CapacityId = item.CapacityId;
+                    info1.CapacityName = item.CapacityId == null ? null : await _unitOfWork.Repository<InfoCapacity>().Where(x => x.DeleteFlag != true && x.CapacityId == item.CapacityId).AsNoTracking().Select(z=>z.CapacityName).FirstOrDefaultAsync();
+                    info1.StartAt = item.StartAt;
+                    info1.EndAt = item.EndAd;
+                    var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().FirstOrDefaultAsync();
+                    if (product != null)
+                    {
+                        info1.Avatar = product.Avatar;
+                        info1.ProductName = product.ProductName;
+                        if (product.NatureId != null)
+                        {
+                            var nature = await _unitOfWork.Repository<InfoNature>().Where(x => x.DeleteFlag != true && x.NatureId == product.NatureId).AsNoTracking().FirstOrDefaultAsync();
+                            if (nature != null)
+                            {
+                                info1.ProductName += " - " + nature.NatureName;
+                            }
+                        }
+                    }
+                    info.thongTinChiTietDonHangs.Add(info1);
+                }
+
+                return info;
+            }
+            return null;
+        }
     }
 }
