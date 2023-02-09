@@ -293,6 +293,28 @@ namespace MyPhamTrueLife.BLL.Implement
                         _unitOfWork.Repository<InfoPriceProduct>().UpdateRange(priceProduct);
                         await _unitOfWork.SaveChangesAsync();
                     }
+                    else
+                    {
+                        var infoPriceProduct = new InfoPriceProduct();
+                        infoPriceProduct.ProductId = value.ProductId;
+                        infoPriceProduct.Price = item.Price;
+                        infoPriceProduct.CreateUser = staffId;
+                        infoPriceProduct.CreateAt = DateTime.Now;
+                        infoPriceProduct.DeleteFlag = false;
+                        infoPriceProduct.StartAt = DateTime.Now;
+                        infoPriceProduct.CapacityId = item.CapacityId;
+                        await _unitOfWork.Repository<InfoPriceProduct>().AddAsync(infoPriceProduct);
+                        await _unitOfWork.SaveChangesAsync();
+
+                        var infoCapacityProduct = new InfoCapacityProduct();
+                        infoCapacityProduct.ProductId = value.ProductId;
+                        infoCapacityProduct.CapacityId = item.CapacityId;
+                        infoCapacityProduct.CreateUser = staffId;
+                        infoCapacityProduct.CreateAt = DateTime.Now;
+                        infoCapacityProduct.DeleteFlag = false;
+                        await _unitOfWork.Repository<InfoCapacityProduct>().AddAsync(infoCapacityProduct);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
                 }
             }
             else
