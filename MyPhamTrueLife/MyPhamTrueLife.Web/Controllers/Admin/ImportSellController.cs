@@ -24,7 +24,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             _importSellService = importSellService;
         }
 
-        [Route("create")]
+        [Route("them-nhap-hang")]
         [HttpPost]
         [AllowAnonymous]
         public async Task<ResponseResult<string>> Post([FromBody] InfoImportSell value, int userId)
@@ -41,7 +41,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             }
         }
 
-        [Route("delete")]
+        [Route("xoa-nhap-hang")]
         [HttpDelete]
         [AllowAnonymous]
         public async Task<ResponseResult<string>> Delete(int importId, int userId)
@@ -59,7 +59,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         }
 
         [HttpPost]
-        [Route("list")]
+        [Route("lay-danh-sach-nhap-hang")]
         [AllowAnonymous]
         public async Task<ResponseResult<ResponseList>> list(int page = 1, int limit = 25)
         {
