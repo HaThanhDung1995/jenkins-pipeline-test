@@ -156,7 +156,6 @@ namespace MyPhamTrueLife.BLL.Implement
                 infoPriceProduct.CreateUser = userId;
                 infoPriceProduct.CreateAt = DateTime.Now;
                 infoPriceProduct.DeleteFlag = false;
-                infoPriceProduct.CapacityId = 1;
                 infoPriceProduct.StartAt = DateTime.Now;
                 await _unitOfWork.Repository<InfoPriceProduct>().AddAsync(infoPriceProduct);
                 await _unitOfWork.SaveChangesAsync();
@@ -188,7 +187,7 @@ namespace MyPhamTrueLife.BLL.Implement
             var info = new ProductDetailAdmin();
             info.ProductId = product.ProductId;
             info.ProductName = product.ProductName;
-            info.Price = product.ProductId;
+            
             info.PriceDiscount = product.ProductId;
             info.Trademark = product.Trademark;
             info.StatusProduct = product.StatusProduct;
@@ -214,7 +213,7 @@ namespace MyPhamTrueLife.BLL.Implement
                         inf.CapacityId = capacity.CapacityId;
                         inf.CapacityName = capacity.CapacityName;
                         inf.Unit = capacity.Unit;
-                        var priceProduct = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.CapacityId == capacity.CapacityId).OrderByDescending(z => z.StartAt).AsNoTracking().FirstOrDefaultAsync();
+                        var priceProduct = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.CapacityId == capacity.CapacityId && x.ProductId == product.ProductId).OrderByDescending(z => z.StartAt).AsNoTracking().FirstOrDefaultAsync();
                         if (priceProduct != null)
                         {
                             inf.PriceProductId = priceProduct.PriceProductId;
@@ -224,8 +223,80 @@ namespace MyPhamTrueLife.BLL.Implement
                     }    
                 }
             }
+            else
+            {
+                var priceProduct = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId == product.ProductId).OrderByDescending(z => z.StartAt).AsNoTracking().FirstOrDefaultAsync();
+
+                info.Price = priceProduct != null ? priceProduct.Price : 0;
+            }    
             info.listCapacityProductRes = list;
             return info;
+        }
+
+        public async Task<bool> UpdateProductAsync(ProductDetailAdmin value, int staffId)
+        {
+            var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == value.ProductId).AsNoTracking().FirstOrDefaultAsync();
+            if (product == null)
+            {
+                return false;
+            }
+            product.ProductName = value.ProductName;
+            product.Trademark = value.Trademark;
+            product.StatusProduct = value.StatusProduct;
+            product.NatureId = value.NatureId;
+            product.Describe = value.Describe;
+            _unitOfWork.Repository<InfoProduct>().UpdateRange(product);
+            await _unitOfWork.SaveChangeAsync();
+
+            //Thêm hình ảnh
+            if (value.listImage != null)
+            {
+                foreach (var image in value.listImage)
+                {
+                    var img = await _unitOfWork.Repository<InfoImageProduct>().Where(x => x.DeleteFlag != true && x.ImgProductId == image.ImgProductId).AsNoTracking().FirstOrDefaultAsync();
+                    if (img != null)
+                    {
+                        img.Img = image.Img;
+                        img.UpdateUser = staffId;
+                        img.UpdateAt = DateTime.Now;
+                        img.DeleteFlag = false;
+                        _unitOfWork.Repository<InfoImageProduct>().UpdateRange(img);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                }
+                
+            }
+
+            if (value.listCapacityProductRes != null)
+            {
+                foreach (var item in value.listCapacityProductRes)
+                {
+                    var priceProduct = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.PriceProductId == item.PriceProductId).AsNoTracking().FirstOrDefaultAsync();
+                    if (priceProduct != null)
+                    {
+                        priceProduct.Price = item.Price;
+                        priceProduct.UpdateUser = staffId;
+                        priceProduct.UpdateAt = DateTime.Now;
+                        priceProduct.DeleteFlag = false;
+                        _unitOfWork.Repository<InfoPriceProduct>().UpdateRange(priceProduct);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                }
+            }
+            else
+            {
+                var infoPriceProduct = new InfoPriceProduct();
+                infoPriceProduct.ProductId = value.ProductId;
+                infoPriceProduct.Price = value.Price;
+                infoPriceProduct.CreateUser = staffId;
+                infoPriceProduct.CreateAt = DateTime.Now;
+                infoPriceProduct.DeleteFlag = false;
+                infoPriceProduct.StartAt = DateTime.Now;
+                await _unitOfWork.Repository<InfoPriceProduct>().AddAsync(infoPriceProduct);
+                await _unitOfWork.SaveChangesAsync();
+            }
+
+            return true;
         }
     }
 }
