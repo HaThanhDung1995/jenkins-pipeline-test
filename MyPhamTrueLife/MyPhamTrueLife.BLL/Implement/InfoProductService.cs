@@ -187,7 +187,7 @@ namespace MyPhamTrueLife.BLL.Implement
             var info = new ProductDetailAdmin();
             info.ProductId = product.ProductId;
             info.ProductName = product.ProductName;
-            
+            info.Avatar = product.Avatar;                                                                                       
             info.PriceDiscount = product.ProductId;
             info.Trademark = product.Trademark;
             info.StatusProduct = product.StatusProduct;
@@ -261,6 +261,17 @@ namespace MyPhamTrueLife.BLL.Implement
                         img.UpdateAt = DateTime.Now;
                         img.DeleteFlag = false;
                         _unitOfWork.Repository<InfoImageProduct>().UpdateRange(img);
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        var infoImageProduct = new InfoImageProduct();
+                        infoImageProduct.ProductId = value.ProductId;
+                        infoImageProduct.Img = image.Img;
+                        infoImageProduct.CreateUser = staffId;
+                        infoImageProduct.CreateAt = DateTime.Now;
+                        infoImageProduct.DeleteFlag = false;
+                        await _unitOfWork.Repository<InfoImageProduct>().AddAsync(infoImageProduct);
                         await _unitOfWork.SaveChangesAsync();
                     }
                 }

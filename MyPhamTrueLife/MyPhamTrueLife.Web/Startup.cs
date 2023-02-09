@@ -177,6 +177,7 @@ namespace MyPhamTrueLife.Web
             services.AddScoped<IInfoProductService, InfoProductService>();
             services.AddScoped<IInfoTypeProductService, InfoTypeProductService>();
             services.AddScoped<IInfoSupplierService, InfoSupplierService>();
+            services.AddScoped<IImportSellService, ImportSellService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             
             

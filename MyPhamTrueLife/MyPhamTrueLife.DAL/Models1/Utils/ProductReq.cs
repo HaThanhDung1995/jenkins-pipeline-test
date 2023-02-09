@@ -69,6 +69,7 @@ namespace MyPhamTrueLife.DAL.Models.Utils
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
+        public string Avatar { get; set; }
         public int? Price { get; set; }
         public int? PriceDiscount { get; set; }
         public string Trademark { get; set; }
