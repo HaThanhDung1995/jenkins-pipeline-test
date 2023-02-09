@@ -161,11 +161,11 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         [HttpPost]
         [Route("xem-chi-tiet-lich-lam-viec")]
         [AllowAnonymous]
-        public async Task<ResponseResult<ResponseList>> detail(int userId, int? day, int? month, int? year, int page = 1, int limit = 25)
+        public async Task<ResponseResult<ResponseList>> detail(int userId, int? calendarId, int page = 1, int limit = 25)
         {
             try
             {
-                var result = await _userAdmin.XemChiTietLichLamViecChoCaHai(userId, day, month, year, page, limit);
+                var result = await _userAdmin.XemChiTietLichLamViecChoCaHai(userId, calendarId, page, limit);
                 return new ResponseResult<ResponseList>(RetCodeEnum.Ok, "Danh sách thời gian làm việc.", result);
             }
             catch (Exception ex)
