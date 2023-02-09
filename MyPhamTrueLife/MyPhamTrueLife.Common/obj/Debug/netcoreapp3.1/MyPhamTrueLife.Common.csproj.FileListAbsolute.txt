@@ -11,3 +11,15 @@ E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\
 E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.dll
 E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.pdb
 E:\Jenkins\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.genruntimeconfig.cache
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.deps.json
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.runtimeconfig.json
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.runtimeconfig.dev.json
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.dll
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\bin\Debug\netcoreapp3.1\MyPhamTrueLife.Common.pdb
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.GeneratedMSBuildEditorConfig.editorconfig
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.AssemblyInfoInputs.cache
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.AssemblyInfo.cs
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.csproj.CoreCompileInputs.cache
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.dll
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.pdb
+E:\HK7\KhoaLuanTotNghiep\3_Code\SoureMoi\jenkins-pipeline-test\MyPhamTrueLife\MyPhamTrueLife.Common\obj\Debug\netcoreapp3.1\MyPhamTrueLife.Common.genruntimeconfig.cache

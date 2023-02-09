@@ -5874,20 +5874,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Dung\\.nuget\\packages\\": {}
+    "C:\\Users\\Pham Huu Tinh\\.nuget\\packages\\": {},
+    "D:\\VS2019\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Web\\MyPhamTrueLife.Web.csproj",
+      "projectUniqueName": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Web\\MyPhamTrueLife.Web.csproj",
       "projectName": "MyPhamTrueLife.Web",
-      "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Web\\MyPhamTrueLife.Web.csproj",
-      "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-      "outputPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Web\\obj\\",
+      "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Web\\MyPhamTrueLife.Web.csproj",
+      "packagesPath": "C:\\Users\\Pham Huu Tinh\\.nuget\\packages\\",
+      "outputPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Web\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "D:\\VS2019\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Pham Huu Tinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -5900,11 +5910,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {
-              "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj"
+            "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {
+              "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj"
             },
-            "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
-              "projectPath": "E:\\ProjectTinh\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
+            "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+              "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
             }
           }
         }
@@ -5964,6 +5974,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[3.1.25, 3.1.25]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5972,7 +5988,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
       }
     }
   }

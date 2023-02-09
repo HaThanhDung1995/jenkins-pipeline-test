@@ -1,21 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {}
+    "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {}
   },
   "projects": {
-    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {
+    "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
+        "projectUniqueName": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
         "projectName": "MyPhamTrueLife.BLL",
-        "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
-        "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-        "outputPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\obj\\",
+        "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\MyPhamTrueLife.BLL.csproj",
+        "packagesPath": "C:\\Users\\Pham Huu Tinh\\.nuget\\packages\\",
+        "outputPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.BLL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\VS2019\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Pham Huu Tinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -28,11 +35,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
-                "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
+              "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+                "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
               },
-              "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
-                "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj"
+              "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
+                "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj"
               }
             }
           }
@@ -77,22 +84,29 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+    "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
+        "projectUniqueName": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
         "projectName": "MyPhamTrueLife.Common",
-        "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
-        "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-        "outputPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\obj\\",
+        "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj",
+        "packagesPath": "C:\\Users\\Pham Huu Tinh\\.nuget\\packages\\",
+        "outputPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\VS2019\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Pham Huu Tinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -147,22 +161,29 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
+    "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj",
+        "projectUniqueName": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj",
         "projectName": "MyPhamTrueLife.DAL",
-        "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj",
-        "packagesPath": "C:\\Users\\Dung\\.nuget\\packages\\",
-        "outputPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\obj\\",
+        "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\MyPhamTrueLife.DAL.csproj",
+        "packagesPath": "C:\\Users\\Pham Huu Tinh\\.nuget\\packages\\",
+        "outputPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.DAL\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\VS2019\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dung\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Pham Huu Tinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -175,8 +196,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
-                "projectPath": "E:\\Jenkins\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
+              "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj": {
+                "projectPath": "E:\\HK7\\KhoaLuanTotNghiep\\3_Code\\SoureMoi\\jenkins-pipeline-test\\MyPhamTrueLife\\MyPhamTrueLife.Common\\MyPhamTrueLife.Common.csproj"
               }
             }
           }
@@ -221,7 +242,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.308\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
         }
       }
     }
