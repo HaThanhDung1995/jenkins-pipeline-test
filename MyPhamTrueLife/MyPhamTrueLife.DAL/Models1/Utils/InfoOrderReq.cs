@@ -22,6 +22,12 @@ namespace MyPhamTrueLife.DAL.Models.Utils
     {
         public string FullName { get; set; }
         public string FullNameStaff { get; set; }
+        //Thông tin user
+        public InfoUser infoUser { get; set; }
+        //Thông tin nhân viên
+        public InfoStaff infoStaff { get; set; }
+        //Thông tin địa chỉ giao hàng
+        public InfoAddressDeliveryUser infoAddressDeliveryUser { get; set; }
     }
 
     public class InfoOrderUpdateStatus

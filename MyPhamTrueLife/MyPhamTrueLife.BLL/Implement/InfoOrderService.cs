@@ -140,6 +140,11 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 item.FullName = item.UserId == null ? "" : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().Select(z=>z.FullName).FirstOrDefaultAsync();
                 item.FullNameStaff = item.StaffId == null ? "" : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
+                item.infoUser = item.UserId == null ? null : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().FirstOrDefaultAsync();
+                item.infoStaff = item.StaffId == null ? null : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync();
+                //item.infoSever = item.SeverId == null ? null : await _unitOfWork.Repository<InfoSever>().Where(x => x.DeleteFlag != true && x.SeverId == order.SeverId).AsNoTracking().FirstOrDefaultAsync();
+                item.infoAddressDeliveryUser = item.AddressDeliveryId == null ? null : await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.AddressDeliveryId == item.AddressDeliveryId.Value).AsNoTracking().FirstOrDefaultAsync();
+
             }
             var totalRows = listData.Count();
             result.Paging = new Paging(totalRows, page, limit);
