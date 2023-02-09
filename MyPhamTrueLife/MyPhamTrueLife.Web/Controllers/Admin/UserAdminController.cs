@@ -64,12 +64,12 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         [HttpPost]
         [Route("tao-lich-lam-viec")]
         [AllowAnonymous]
-        public async Task<ResponseResult<string>> TaoLichLamViec(int userId)
+        public async Task<ResponseResult<string>> TaoLichLamViec(int userId, int? month, int? year)
         {
             try
             {
                 
-                var result = await _userAdmin.TaoLichLamViec(userId);
+                var result = await _userAdmin.TaoLichLamViec(userId, month, year);
                 if (result != true)
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Tạo lịch làm việc thất bại", null);

@@ -117,17 +117,21 @@ namespace MyPhamTrueLife.BLL.Implement
             return listData;
         }
 
-        public async Task<bool> TaoLichLamViec(int userId)
+        public async Task<bool> TaoLichLamViec(int userId, int? month, int? year)
         {
             if (userId <= 0)
             {
                 return false;
             }
-            var date = DateTime.Now;
-            int month = date.Month;
-            int year = date.Year;
+            if (month == null || year == null)
+            {
+                var date = DateTime.Now;
+                month = date.Month;
+                year = date.Year;
+            }
+            
             //Tất cả ngày trong tháng
-            var tmp = DateTime.DaysInMonth(date.Year, date.Month);
+            var tmp = DateTime.DaysInMonth(year.Value, month.Value);
 
 
             var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.YearI == year && x.MonthI == month).AsNoTracking().FirstOrDefaultAsync();
