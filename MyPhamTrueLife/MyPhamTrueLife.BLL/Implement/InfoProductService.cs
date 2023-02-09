@@ -298,5 +298,20 @@ namespace MyPhamTrueLife.BLL.Implement
 
             return true;
         }
+
+        public async Task<bool> DeleteProductAsync(int productId, int staffId)
+        {
+            var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == productId).AsNoTracking().FirstOrDefaultAsync();
+            if (product != null)
+            {
+                product.DeleteFlag = true;
+                product.UpdateAt = DateTime.Now;
+                product.UpdateUser = staffId;
+                _unitOfWork.Repository<InfoProduct>().UpdateRange(product);
+                await _unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }

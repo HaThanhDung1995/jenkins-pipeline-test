@@ -15,5 +15,6 @@ namespace MyPhamTrueLife.BLL.Interface
 
         Task<ProductDetailAdmin> ProductDetailAsync(int id);
         Task<bool> UpdateProductAsync(ProductDetailAdmin value, int staffId);
+        Task<bool> DeleteProductAsync(int productId, int staffId);
     }
 }

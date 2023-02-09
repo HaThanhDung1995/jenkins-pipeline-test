@@ -14,5 +14,7 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<int> ForgotPassWordAsync(string UserName);
         Task<bool> CheckUserNameAsync(string userName);
         Task<InfoUser> GetByUserNameAsync(string userName);
+
+        Task<ResponseList> GetListOrderByUserAdminAsync(int userId ,int page = 1, int limit = 25);
     }
 }

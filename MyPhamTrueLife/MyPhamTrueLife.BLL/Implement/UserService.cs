@@ -104,5 +104,42 @@ namespace MyPhamTrueLife.BLL.Implement
             var info = await _unitOfWork.Repository<InfoUser>().Where(x => x.UserName.Equals(userName)).AsNoTracking().FirstOrDefaultAsync();
             return info;
         }
+
+        public async Task<ResponseList> GetListOrderByUserAdminAsync(int userId, int page = 1, int limit = 25)
+        {
+            var result = new ResponseList();
+            var listOrder = _unitOfWork.Repository<InfoOrder>().Where(x => x.DeleteFlag != true);
+
+            var listData = await (from a in listOrder
+                                  where a.UserId == userId
+                                  select new InfoOrderList()
+                                  {
+                                      OrderId = a.OrderId,
+                                      UserId = a.UserId,
+                                      IsAccept = a.IsAccept,
+                                      StaffId = a.StaffId,
+                                      Total = a.Total,
+                                      Status = a.Status,
+                                      IsPay = a.IsPay,
+                                      StatusOrder = a.StatusOrder,
+                                      SeverId = a.SeverId,
+                                      DateTimeD = a.DateTimeD,
+                                      AddressDeliveryId = a.AddressDeliveryId,
+                                      //FullName = b.FullName,
+                                      //FullNameStaff = c.FullName,
+                                      CreateAt = a.CreateAt
+                                  }).AsNoTracking().ToListAsync();
+            foreach (var item in listData)
+            {
+                item.FullName = item.UserId == null ? "" : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
+                item.FullNameStaff = item.StaffId == null ? "" : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
+            }
+            var totalRows = listData.Count();
+            result.Paging = new Paging(totalRows, page, limit);
+            int start = result.Paging.start;
+            listData = listData.OrderByDescending(z => z.CreateAt).Skip(start).Take(limit).ToList();
+            result.ListData = listData;
+            return result;
+        }
     }
 }

@@ -228,6 +228,21 @@ namespace MyPhamTrueLife.Web.Controllers.Client
             }
         }
 
+        [HttpPost]
+        [Route("lay-danh-sach-don-hang")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<ResponseList>> list(int userId ,int page = 1, int limit = 25)
+        {
+            try
+            {
+                var result = await _user.GetListOrderByUserAdminAsync(userId, page, limit);
+                return new ResponseResult<ResponseList>(RetCodeEnum.Ok, "Danh sách đơn hàng.", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
         private bool SendMailThankYou(EmailInfo EmailInfo)
         {
             try

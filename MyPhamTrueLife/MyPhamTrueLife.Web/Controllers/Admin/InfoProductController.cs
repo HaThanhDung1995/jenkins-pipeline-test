@@ -132,15 +132,32 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         [Route("cap-nhat-san-pham")]
         [HttpPut]
         [AllowAnonymous]
-        public async Task<ResponseResult<string>> CapNhatSanPham(ProductDetailAdmin value, int staffId)
+        public async Task<ResponseResult<string>> CapNhatSanPham(ProductDetailAdmin value, int userId)
         {
             try
             {
-                var result = await _infoProductService.UpdateProductAsync(value, staffId);
+                var result = await _infoProductService.UpdateProductAsync(value, userId);
                 if (result != true)
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật sản phẩm thất bại", null);
                 }
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("xoa-san-pham")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> Delete(int productId, int userId)
+        {
+            try
+            {
+                //int currentUserId = GetCurrentUserId();
+                var result = await _infoProductService.DeleteProductAsync(productId, userId);
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
