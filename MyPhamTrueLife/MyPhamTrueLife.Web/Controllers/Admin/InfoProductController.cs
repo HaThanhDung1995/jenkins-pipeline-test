@@ -129,7 +129,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             }
         }
 
-        [Route("xem-chi-tiet-san-pham")]
+        [Route("cap-nhat-san-pham")]
         [HttpPut]
         [AllowAnonymous]
         public async Task<ResponseResult<string>> CapNhatSanPham(ProductDetailAdmin value, int staffId)
