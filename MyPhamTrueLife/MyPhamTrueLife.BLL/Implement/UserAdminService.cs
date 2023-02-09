@@ -382,5 +382,72 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             return listInfo;
         }
+
+        public async Task<int> DiemDanhVaKetCaCuaNhanVien(int? staffId, int? detailcalendarId, bool? IsAtendan)
+        {
+            if (staffId == null || detailcalendarId == null)
+            {
+                return 1;
+            }
+            var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId.Value).AsNoTracking().FirstOrDefaultAsync();
+            if (infoStaff == null)
+            {
+                return 1;
+            }
+            var infoDetailStaff = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DetailCalendarId == detailcalendarId.Value).AsNoTracking().FirstOrDefaultAsync();
+            if (infoDetailStaff == null)
+            {
+                return 1;
+            }
+            var infoCalendar = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == infoDetailStaff.CalendarId).AsNoTracking().FirstOrDefaultAsync();
+            if (infoCalendar == null)
+            {
+                return 1;
+            }
+            if (IsAtendan == true)
+            {
+                if (infoDetailStaff.StartAt != null)
+                {
+                    return 2;
+                }
+                DateTime date = new DateTime(infoCalendar.YearI.Value, infoCalendar.MonthI.Value, infoDetailStaff.DayI.Value, 07, 00, 00);
+                if (infoDetailStaff.ShiftI == 2)
+                {
+                    date = new DateTime(infoCalendar.YearI.Value, infoCalendar.MonthI.Value, infoDetailStaff.DayI.Value, 12, 00, 00);
+                }
+                if (DateTime.Now < date || DateTime.Now.Date != date.Date)
+                {
+                    return 3;
+                }
+                infoDetailStaff.StartAt = DateTime.Now;
+                infoDetailStaff.UpdateAt = DateTime.Now;
+                infoDetailStaff.UpdateUser = staffId;
+                infoDetailStaff.DeleteFlag = false;
+            }
+            else
+            {
+                if (infoDetailStaff.StartAt == null)
+                {
+                    return 4;
+                }
+                DateTime date = new DateTime(infoCalendar.YearI.Value, infoCalendar.MonthI.Value, infoDetailStaff.DayI.Value, 12, 00, 00);
+                if (infoDetailStaff.ShiftI == 2)
+                {
+                    date = new DateTime(infoCalendar.YearI.Value, infoCalendar.MonthI.Value, infoDetailStaff.DayI.Value, 17, 00, 00);
+                }
+                if (DateTime.Now < date || DateTime.Now.Date != date.Date)
+                {
+                    return 3;
+                }
+                infoDetailStaff.EndAt = DateTime.Now;
+                infoDetailStaff.UpdateAt = DateTime.Now;
+                infoDetailStaff.IsDo = true;
+                infoDetailStaff.UpdateUser = staffId;
+                infoDetailStaff.DeleteFlag = false;
+            }
+            _unitOfWork.Repository<InfoDetailCalendar>().UpdateRange(infoDetailStaff);
+            await _unitOfWork.SaveChangeAsync();
+            return 0;
+        }
     }
 }

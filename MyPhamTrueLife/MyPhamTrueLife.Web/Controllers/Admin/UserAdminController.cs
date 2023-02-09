@@ -173,5 +173,37 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        [HttpPost]
+        [Route("diem-danh-vao-ra")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> DiemDanh(int? staffId, int? detailcalendarId, bool? IsAtendan)
+        {
+            try
+            {
+                var result = await _userAdmin.DiemDanhVaKetCaCuaNhanVien(staffId,detailcalendarId, IsAtendan);
+                if (result == 1)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Điểm danh thất bại, thông tin bị trống", result.ToString());
+                }
+                if (result == 2)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Điểm danh thất bại, bạn đã điểm danh trước đó", result.ToString());
+                }
+                if (result == 3)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thất bại, chưa đúng ngày", result.ToString());
+                }
+                if (result == 4)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Điểm danh thất bại, chưa tới giờ", result.ToString());
+                }
+                return new ResponseResult<string>(RetCodeEnum.Ok, "Điểm danh thành công", result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }

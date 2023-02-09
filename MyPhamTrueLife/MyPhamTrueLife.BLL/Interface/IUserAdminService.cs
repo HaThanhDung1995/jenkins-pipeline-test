@@ -22,5 +22,6 @@ namespace MyPhamTrueLife.BLL.Interface
         //Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt);
         Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId);
         Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, DateTime? dateAt);
+        Task<int> DiemDanhVaKetCaCuaNhanVien(int? staffId, int? detailcalendarId, bool? IsAtendan);
     }
 }
