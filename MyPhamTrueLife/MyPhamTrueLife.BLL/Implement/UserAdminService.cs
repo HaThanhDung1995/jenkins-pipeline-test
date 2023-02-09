@@ -188,7 +188,7 @@ namespace MyPhamTrueLife.BLL.Implement
             return listData;
         }
 
-        public async Task<ResponseList> XemChiTietLichLamViecChoCaHai(int userId, int? day, int? month, int? year, int page = 1, int limit = 25)
+        public async Task<ResponseList> XemChiTietLichLamViecChoCaHai(int userId, int? calendarId, int page = 1, int limit = 25)
         {
             var listData = new ResponseList();
             listData.ListData = null;
@@ -196,35 +196,38 @@ namespace MyPhamTrueLife.BLL.Implement
             var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == userId).AsNoTracking().FirstOrDefaultAsync();
             if (infoStaff != null)
             {
-                if (month == null || year == null || day == null)
+                int? month = null;
+                int? year = null;
+                var calendar = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == calendarId).AsNoTracking().FirstOrDefaultAsync();
+                if (calendar == null)
                 {
                     month = DateTime.Now.Month;
                     year = DateTime.Now.Year;
-                    day = DateTime.Now.Day;
                 }
-                var infoCalendar = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == month && x.YearI == year).AsNoTracking().FirstOrDefaultAsync();
-                if (infoCalendar != null)
+                else
                 {
-                    var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == infoCalendar.CalendarId && x.DayI == day).AsNoTracking().ToListAsync();
-                    foreach (var item in infoDetailCalendar)
+                    month = calendar.MonthI;
+                    year = calendar.YearI;
+                }
+                var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == calendar.CalendarId).AsNoTracking().ToListAsync();
+                foreach (var item in infoDetailCalendar)
+                {
+                    if (item.StaffId != null)
                     {
-                        if (item.StaffId != null)
+                        var infoStaff1 = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync();
+                        if (infoStaff1 != null)
                         {
-                            var infoStaff1 = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync();
-                            if (infoStaff1 != null)
-                            {
-                                var info = new DanhSachLichLamViecNes();
-                                info.StaffId = infoStaff1.StaffId;
-                                info.StaffName = infoStaff1.FullName;
-                                info.PositionStaffId = infoStaff1.PositionStaffId.Value;
-                                info.PositionStaffName = infoStaff1.PositionStaffId == null ? "" : await _unitOfWork.Repository<InfoPositionStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff1.PositionStaffId).AsNoTracking().Select(z => z.PositionStaffName).FirstOrDefaultAsync();
-                                info.DayI = item.DayI.Value;
-                                info.ShiftI = item.ShiftI;
-                                info.IsDo = item.IsDo;
-                                info.StartAt = item.StartAt;
-                                info.EndAt = item.EndAt;
-                                result.Add(info);
-                            }
+                            var info = new DanhSachLichLamViecNes();
+                            info.StaffId = infoStaff1.StaffId;
+                            info.StaffName = infoStaff1.FullName;
+                            info.PositionStaffId = infoStaff1.PositionStaffId.Value;
+                            info.PositionStaffName = infoStaff1.PositionStaffId == null ? "" : await _unitOfWork.Repository<InfoPositionStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff1.PositionStaffId).AsNoTracking().Select(z => z.PositionStaffName).FirstOrDefaultAsync();
+                            info.DayI = item.DayI.Value;
+                            info.ShiftI = item.ShiftI;
+                            info.IsDo = item.IsDo;
+                            info.StartAt = item.StartAt;
+                            info.EndAt = item.EndAt;
+                            result.Add(info);
                         }
                     }
                 }
