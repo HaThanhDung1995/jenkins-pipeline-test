@@ -82,19 +82,35 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             }
         }
 
+        //[HttpPost]
+        //[Route("lay-lich-lam-viec-admin")]
+        //[AllowAnonymous]
+        //public async Task<ResponseResult<List<LichTaoViecChoAdmin>>> LayLichLamViecAdmin(DateTime? dateTime)
+        //{
+        //    try
+        //    {
+        //        var result = await _userAdmin.LayLichLamDeDangKy(dateTime);
+        //        return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.ApiError, ex.Message, null);
+        //    }
+        //}
+
         [HttpPost]
-        [Route("lay-lich-lam-viec-admin")]
+        [Route("lay-danh-sach-lich-lam-viec")]
         [AllowAnonymous]
-        public async Task<ResponseResult<List<LichTaoViecChoAdmin>>> LayLichLamViecAdmin(DateTime? dateTime)
+        public async Task<ResponseResult<ResponseList>> list(int page = 1, int limit = 25)
         {
             try
             {
-                var result = await _userAdmin.LayLichLamDeDangKy(dateTime);
-                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
+                var result = await _userAdmin.LayLichLamViecChoCaHai(page, limit);
+                return new ResponseResult<ResponseList>(RetCodeEnum.Ok, "Danh sách thời gian làm việc.", result);
             }
             catch (Exception ex)
             {
-                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.ApiError, ex.Message, null);
+                return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
 
@@ -139,6 +155,22 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             catch (Exception ex)
             {
                 return new ResponseResult<List<LichLamViecCuaNhanVien>>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [HttpPost]
+        [Route("xem-chi-tiet-lich-lam-viec")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<ResponseList>> detail(int userId, int? day, int? month, int? year, int page = 1, int limit = 25)
+        {
+            try
+            {
+                var result = await _userAdmin.XemChiTietLichLamViecChoCaHai(userId, day, month, year, page, limit);
+                return new ResponseResult<ResponseList>(RetCodeEnum.Ok, "Danh sách thời gian làm việc.", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<ResponseList>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
     }

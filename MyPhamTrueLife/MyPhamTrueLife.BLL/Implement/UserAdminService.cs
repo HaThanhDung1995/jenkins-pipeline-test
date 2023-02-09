@@ -175,36 +175,112 @@ namespace MyPhamTrueLife.BLL.Implement
             return true;
         }
 
-        public async Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt)
+        public async Task<ResponseList> LayLichLamViecChoCaHai(int page = 1, int limit = 25)
         {
-            var listInfo = new List<LichTaoViecChoAdmin>();
-            if (dateAt == null) dateAt = DateTime.Now;
-            var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
-            if (infoCalenda == null)
+            var listData = new ResponseList();
+            listData.ListData = null;
+            var listInfo = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true).OrderByDescending(z => z.CreateAt).AsNoTracking().ToListAsync();
+            var totalRows = listInfo.Count();
+            listData.Paging = new Paging(totalRows, page, limit);
+            int start = listData.Paging.start;
+            listInfo = listInfo.Skip(start).Take(limit).ToList();
+            listData.ListData = listInfo;
+            return listData;
+        }
+
+        public async Task<ResponseList> XemChiTietLichLamViecChoCaHai(int userId, int? day, int? month, int? year, int page = 1, int limit = 25)
+        {
+            var listData = new ResponseList();
+            listData.ListData = null;
+            var result = new List<DanhSachLichLamViecNes>();
+            var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == userId).AsNoTracking().FirstOrDefaultAsync();
+            if (infoStaff != null)
             {
-                return listInfo;
-            }
-            var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
-            for (int i = 1; i <= tmp; i++)
-            {
-                var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
-                if (infoDetail != null && infoDetail.Count > 0)
+                if (month == null || year == null || day == null)
                 {
-                    var info = new LichTaoViecChoAdmin();
-                    info.infoDetailCalendar = infoDetail.FirstOrDefault();
-                    if (infoDetail.Count >= 5)
+                    month = DateTime.Now.Month;
+                    year = DateTime.Now.Year;
+                    day = DateTime.Now.Day;
+                }
+                var infoCalendar = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == month && x.YearI == year).AsNoTracking().FirstOrDefaultAsync();
+                if (infoCalendar != null)
+                {
+                    var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == infoCalendar.CalendarId && x.DayI == day).AsNoTracking().ToListAsync();
+                    foreach (var item in infoDetailCalendar)
                     {
-                        info.Status = true;
+                        if (item.StaffId != null)
+                        {
+                            var infoStaff1 = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync();
+                            if (infoStaff1 != null)
+                            {
+                                var info = new DanhSachLichLamViecNes();
+                                info.StaffId = infoStaff1.StaffId;
+                                info.StaffName = infoStaff1.FullName;
+                                info.PositionStaffId = infoStaff1.PositionStaffId.Value;
+                                info.PositionStaffName = infoStaff1.PositionStaffId == null ? "" : await _unitOfWork.Repository<InfoPositionStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff1.PositionStaffId).AsNoTracking().Select(z => z.PositionStaffName).FirstOrDefaultAsync();
+                                info.DayI = item.DayI.Value;
+                                info.ShiftI = item.ShiftI;
+                                info.IsDo = item.IsDo;
+                                info.StartAt = item.StartAt;
+                                info.EndAt = item.EndAt;
+                                result.Add(info);
+                            }
+                        }
                     }
-                    else
+                }
+                if (infoStaff.PositionStaffId != null)
+                {
+                    if (infoStaff.PositionStaffId == 1 || infoStaff.PositionStaffId == 3 || infoStaff.PositionStaffId == 5 || infoStaff.PositionStaffId == 6)
                     {
-                        info.Status = false;
+                        if (infoStaff.PositionStaffId == 1)
+                        {
+                            result = result.Where(x => x.StaffId != 1).ToList();
+                        }
+                        if (infoStaff.PositionStaffId == 3 || infoStaff.PositionStaffId == 5 || infoStaff.PositionStaffId == 6)
+                        {
+                            result = result.Where(x => x.StaffId == infoStaff.StaffId).ToList();
+                        }
+                        var totalRows = result.Count();
+                        listData.Paging = new Paging(totalRows, page, limit);
+                        int start = listData.Paging.start;
+                        result = result.Skip(start).Take(limit).ToList();
+                        listData.ListData = result;
                     }
-                    listInfo.Add(info);
                 }
             }
-            return listInfo;
+            return listData;
         }
+
+        //public async Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt)
+        //{
+        //    var listInfo = new List<LichTaoViecChoAdmin>();
+        //    if (dateAt == null) dateAt = DateTime.Now;
+        //    var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
+        //    if (infoCalenda == null)
+        //    {
+        //        return listInfo;
+        //    }
+        //    var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
+        //    for (int i = 1; i <= tmp; i++)
+        //    {
+        //        var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
+        //        if (infoDetail != null && infoDetail.Count > 0)
+        //        {
+        //            var info = new LichTaoViecChoAdmin();
+        //            info.infoDetailCalendar = infoDetail.FirstOrDefault();
+        //            if (infoDetail.Count >= 5)
+        //            {
+        //                info.Status = true;
+        //            }
+        //            else
+        //            {
+        //                info.Status = false;
+        //            }
+        //            listInfo.Add(info);
+        //        }
+        //    }
+        //    return listInfo;
+        //}
 
         public async Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId)
         {

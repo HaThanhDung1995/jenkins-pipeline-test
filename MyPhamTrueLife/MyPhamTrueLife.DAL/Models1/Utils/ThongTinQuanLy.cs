@@ -77,4 +77,17 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public int? UpdateUser { get; set; }
         public bool? DeleteFlag { get; set; }
     }
+
+    public class DanhSachLichLamViecNes
+    {
+        public int StaffId { get; set; }
+        public string StaffName { get; set; }
+        public int PositionStaffId { get; set; }
+        public string PositionStaffName { get; set; }
+        public int DayI { get; set; }
+        public int? ShiftI { get; set; }
+        public bool? IsDo { get; set; }
+        public DateTime? StartAt { get; set; }
+        public DateTime? EndAt { get; set; }
+    }
 }
