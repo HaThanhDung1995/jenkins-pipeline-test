@@ -26,6 +26,7 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             value.CreateAt = DateTime.Now;
             value.CreateUser = userId;
+            value.DeleteFlag = false;
             await _unitOfWork.Repository<InfoSupplier>().AddAsync(value);
             await _unitOfWork.SaveChangeAsync();
             return true;
