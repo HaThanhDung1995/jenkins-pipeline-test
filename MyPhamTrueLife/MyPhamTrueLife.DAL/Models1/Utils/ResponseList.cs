@@ -9,11 +9,4 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public Paging Paging { get; set; }
         public Object ListData { get; set; }
     }
-
-    public class ResponseAffiliateList
-    {
-        public Paging Paging { get; set; }
-        public Object ExtendsData { get; set; }
-        public Object ListData { get; set; }
-    }
 }

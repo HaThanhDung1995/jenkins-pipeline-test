@@ -12,8 +12,10 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<bool> CreateImportSellServiceAsync(InfoImportSell value, int staffId);
         Task<bool> DeleteImportSellServiceAsync(int id, int staffId);
         Task<ResponseList> ListImportSellServiceAsync(int page = 1, int limit = 25);
+        Task<ResponseList> DetailImportSellAsync(int importSellId, int page = 1, int limit = 25);
 
         //Thêm danh sách chi tiết sản phẩm
         Task<bool> ThemDanhSachChiTietNhapHang(List<InfoDetailImportSell> value, int staffId, int importSellId);
+
     }
 }

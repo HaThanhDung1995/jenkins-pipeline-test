@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using MyPhamTrueLife.DAL.Models1.Utils;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -80,6 +81,41 @@ namespace MyPhamTrueLife.BLL.Implement
                 return true;
             }
             return false;
+        }
+
+        public async Task<ResponseList> DetailImportSellAsync(int importSellId, int page = 1, int limit = 25)
+        {
+            var listData = new ResponseList();
+            listData.ListData = null;
+            var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
+            if (importSell == null)
+            {
+                return listData;
+            }
+            var listInfoImportSell = await _unitOfWork.Repository<InfoDetailImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSell.ImportSellId).AsNoTracking().ToListAsync();
+            var listInfo = new List<InfoDetailImportList>();
+            foreach (var item in listInfoImportSell)
+            {
+                var info = new InfoDetailImportList();
+                info.ImportSellId = item.ImportSellId;
+                info.ProductId = item.ProductId;
+                info.infoProduct = await _unitOfWork.Repository<InfoProduct>().Where(x=>x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().FirstOrDefaultAsync();
+                info.Amount = item.Amount;
+                info.Prize = item.Prize;
+                info.CapacityId = item.CapacityId;
+                info.infoCapacity = item.CapacityId == null ? null : await _unitOfWork.Repository<InfoCapacity>().Where(x => x.DeleteFlag != true && x.CapacityId == item.CapacityId).AsNoTracking().FirstOrDefaultAsync(); ;
+                info.StartAt = item.StartAt;
+                info.EndAt = item.EndAt;
+                info.Trademark = item.Trademark;
+                listInfo.Add(info);
+            }
+
+            var totalRows = listInfo.Count();
+            listData.Paging = new Paging(totalRows, page, limit);
+            int start = listData.Paging.start;
+            listInfo = listInfo.Skip(start).Take(limit).ToList();
+            listData.ListData = listInfo;
+            return listData;
         }
     }
 }

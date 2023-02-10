@@ -89,5 +89,22 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+
+        [Route("xem-chit-tiet-don-nhap-hang")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> Post2(int importSellId, int page = 1, int limit = 25)
+        {
+            try
+            {
+                var result = await _importSellService.DetailImportSellAsync(importSellId, page, limit);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
     }
 }
