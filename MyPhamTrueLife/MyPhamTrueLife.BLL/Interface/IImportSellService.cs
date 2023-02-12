@@ -16,6 +16,7 @@ namespace MyPhamTrueLife.BLL.Interface
 
         //Thêm danh sách chi tiết sản phẩm
         Task<bool> ThemDanhSachChiTietNhapHang(List<InfoDetailImportSell> value, int staffId, int importSellId);
+        Task<bool> XoaChiTietNhapHang(int importSellId, int productId, int? capacityId, int staffId)
         //Cập nhật đơn hàng
         Task<bool> CapNhatTrangThaiDonNhapHang(int importSellId, int staffId, string Status);
         Task<bool> CapNhatTrangThaiThanhToanDonNhapHang(int importSellId, int staffId);

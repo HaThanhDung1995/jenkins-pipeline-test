@@ -173,5 +173,40 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             return false;
         }
+
+        public async Task<bool> XoaChiTietNhapHang(int importSellId, int productId, int? capacityId, int staffId)
+        {
+            var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
+            if (importSell != null)
+            {
+                var productInfo = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == productId).AsNoTracking().FirstOrDefaultAsync();
+                if (productInfo != null)
+                {
+                    var importDetailSell = await _unitOfWork.Repository<InfoDetailImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId && x.ProductId == productId).AsNoTracking().FirstOrDefaultAsync();
+                    if (capacityId != null)
+                    {
+                        importDetailSell = await _unitOfWork.Repository<InfoDetailImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId && x.ProductId == productId && x.CapacityId == capacityId).AsNoTracking().FirstOrDefaultAsync();
+                    }
+                    if (importDetailSell != null)
+                    {
+                        int price = (importDetailSell.Amount.Value * importDetailSell.Prize.Value);
+                        importDetailSell.DeleteFlag = true;
+                        importDetailSell.UpdateAt = DateTime.Now;
+                        importDetailSell.UpdateUser = staffId;
+                        _unitOfWork.Repository<InfoDetailImportSell>().Update(importDetailSell);
+                        await _unitOfWork.SaveChangeAsync();
+                        //Cập nhật số lượng vào kho
+                        importSell.Total -= price;
+                        importSell.DeleteFlag = false;
+                        importSell.UpdateAt = DateTime.Now;
+                        importSell.UpdateUser = staffId;
+                        _unitOfWork.Repository<InfoImportSell>().Update(importSell);
+                        await _unitOfWork.SaveChangeAsync();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

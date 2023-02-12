@@ -166,10 +166,30 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         {
             try
             {
-                var result = await _importSellService.CapNhatTrangThaiThanhToanDonNhapHang(importSellId, staffId);
+                var result = await _importSellService.CapNhatDonNhapHangVaoKho(importSellId, staffId);
                 if (result != true)
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhập hàng vào kho không thành công", result.ToString());
+                }
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("xoa-chi-tiet-nhap-hang")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> DeletehapHang(int importSellId, int productId, int? capacityId, int staffId)
+        {
+            try
+            {
+                var result = await _importSellService.XoaChiTietNhapHang(importSellId, productId, capacityId, staffId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Xóa chi tiết nhập hàng không thành công", result.ToString());
                 }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
