@@ -33,6 +33,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             {
                 //int currentUserId = GetCurrentUserId();
                 var result = await _importSellService.CreateImportSellServiceAsync(value, userId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm nhập hàng không thành công", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
@@ -50,6 +54,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             {
                 //int currentUserId = GetCurrentUserId();
                 var result = await _importSellService.DeleteImportSellServiceAsync(importId, userId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Xóa nhập hàng không thành công", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
@@ -82,6 +90,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             try
             {
                 var result = await _importSellService.ThemDanhSachChiTietNhapHang(value, userId, importSellId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Thêm chi tiết nhập hàng không thành công", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
@@ -99,6 +111,66 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             try
             {
                 var result = await _importSellService.DetailImportSellAsync(importSellId, page, limit);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("cap-nhat-trang-thai-nhap-hang")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateStatusImport(int importSellId, int staffId, string Status)
+        {
+            try
+            {
+                var result = await _importSellService.CapNhatTrangThaiDonNhapHang(importSellId, staffId, Status);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật trạng thái nhập hàng thất bại", result.ToString());
+                }
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("cap-nhat-trang-thai-thanh-toan")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateStatusPayImport(int importSellId, int staffId)
+        {
+            try
+            {
+                var result = await _importSellService.CapNhatTrangThaiThanhToanDonNhapHang(importSellId, staffId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật nhập hàng trạng thái thanh toán không thành công", result.ToString());
+                }
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("cap-nhat-nhap-hang-vao-kho")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateTockImport(int importSellId, int staffId)
+        {
+            try
+            {
+                var result = await _importSellService.CapNhatTrangThaiThanhToanDonNhapHang(importSellId, staffId);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhập hàng vào kho không thành công", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
