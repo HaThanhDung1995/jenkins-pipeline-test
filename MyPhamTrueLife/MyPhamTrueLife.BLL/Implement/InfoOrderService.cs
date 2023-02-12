@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -155,7 +156,12 @@ namespace MyPhamTrueLife.BLL.Implement
                 item.infoUser = item.UserId == null ? null : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().FirstOrDefaultAsync();
                 item.infoStaff = item.StaffId == null ? null : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync();
                 //item.infoSever = item.SeverId == null ? null : await _unitOfWork.Repository<InfoSever>().Where(x => x.DeleteFlag != true && x.SeverId == order.SeverId).AsNoTracking().FirstOrDefaultAsync();
-                item.infoAddressDeliveryUser = item.AddressDeliveryId == null ? null : await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.AddressDeliveryId == item.AddressDeliveryId.Value).AsNoTracking().FirstOrDefaultAsync();
+                var infoAdd = item.AddressDeliveryId == null ? null : await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.AddressDeliveryId == item.AddressDeliveryId.Value).AsNoTracking().FirstOrDefaultAsync();
+
+                var addRess = new IndoAddressDeliveryReq();
+                PropertyCopier<InfoAddressDeliveryUser, IndoAddressDeliveryReq>.Copy(infoAdd, addRess);
+                item.infoAddressDeliveryUser = new IndoAddressDeliveryReq();
+                item.infoAddressDeliveryUser = addRess;
 
             }
             var totalRows = listData.Count();

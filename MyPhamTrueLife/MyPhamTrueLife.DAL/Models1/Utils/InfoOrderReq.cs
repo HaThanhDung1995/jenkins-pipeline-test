@@ -27,7 +27,7 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         //Thông tin nhân viên
         public InfoStaff infoStaff { get; set; }
         //Thông tin địa chỉ giao hàng
-        public InfoAddressDeliveryUser infoAddressDeliveryUser { get; set; }
+        public IndoAddressDeliveryReq infoAddressDeliveryUser { get; set; }
     }
 
     public class InfoOrderUpdateStatus
