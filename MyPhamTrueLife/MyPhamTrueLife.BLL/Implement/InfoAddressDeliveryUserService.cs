@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -61,14 +62,23 @@ namespace MyPhamTrueLife.BLL.Implement
             await _unitOfWork.SaveChangeAsync();
             return true;
         }
-        public async Task<List<InfoAddressDeliveryUser>> ListInfoAddressDeliveryUserAsync(int usserId)
+        public async Task<List<IndoAddressDeliveryReq>> ListInfoAddressDeliveryUserAsync(int usserId)
         {
-            if (usserId == null || usserId <= 0)
+            if (usserId <= 0)
             {
                 return null;
             }
             var listUserAddres = await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.UserId.Equals(usserId)).AsNoTracking().ToListAsync();
-            return listUserAddres;
+            var listInfo = new List<IndoAddressDeliveryReq>();
+            foreach (var item in listUserAddres)
+            {
+                var info = new IndoAddressDeliveryReq();
+                PropertyCopier<InfoAddressDeliveryUser, IndoAddressDeliveryReq>.Copy(item, info);
+                info.ProvinceName = await _unitOfWork.Repository<InfoProvince>().Where(x => x.DeleteFlag != true && x.ProvinceId == item.ProvinceId).AsNoTracking().Select(z => z.Name).FirstOrDefaultAsync();
+                info.DistrictName = await _unitOfWork.Repository<InfoDistrict>().Where(x => x.DeleteFlag != true && x.DistrictId == item.DistrictId).AsNoTracking().Select(z => z.Name).FirstOrDefaultAsync();
+                listInfo.Add(info);
+            }
+            return listInfo;
         }
     }
 }

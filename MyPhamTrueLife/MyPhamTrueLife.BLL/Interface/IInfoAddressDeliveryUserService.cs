@@ -11,6 +11,6 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<bool> CreateInfoAddressDeliveryUserAsync(InfoAddressDeliveryUser value);
         Task<bool> UpdateInfoAddressDeliveryUserAsync(InfoAddressDeliveryUser value);
         Task<bool> DeleteInfoAddressDeliveryUserAsync(int id);
-        Task<List<InfoAddressDeliveryUser>> ListInfoAddressDeliveryUserAsync(int usserId);
+        Task<List<IndoAddressDeliveryReq>> ListInfoAddressDeliveryUserAsync(int usserId);
     }
 }

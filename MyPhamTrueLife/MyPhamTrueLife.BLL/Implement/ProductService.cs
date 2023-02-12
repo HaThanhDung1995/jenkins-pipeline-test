@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -255,7 +256,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 var pricePro = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().OrderByDescending(z => z.StartAt).ToListAsync();
                 if (pricePro != null && pricePro.Count > 0 && pricePro[0] != null)
                 {
-                    info.Price = pricePro[0].Price + pricePro[0].Price / 10;
+                    info.Price = pricePro[0].Price + (int)(pricePro[0].Price / 10);
                     info.PriceDiscount = pricePro[0].Price;
                 }
             }
@@ -275,7 +276,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     var priceProNature = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().OrderByDescending(z => z.StartAt).ToListAsync();
                     if (priceProNature != null && priceProNature.Count > 0 && priceProNature[0] != null)
                     {
-                        info.Price = priceProNature[0].Price + priceProNature[0].Price / 10;
+                        info.Price = priceProNature[0].Price + (int)(priceProNature[0].Price / 10);
                         info.PriceDiscount = priceProNature[0].Price;
                     }
                 }
@@ -293,7 +294,7 @@ namespace MyPhamTrueLife.BLL.Implement
                     var priceProNature = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().OrderByDescending(z => z.StartAt).ToListAsync();
                     if (priceProNature != null && priceProNature.Count > 0 && priceProNature[0] != null)
                     {
-                        info.Price = priceProNature[0].Price + priceProNature[0].Price / 10;
+                        info.Price = priceProNature[0].Price + (int)(priceProNature[0].Price / 10);
                         info.PriceDiscount = priceProNature[0].Price;
                     }
                 }
@@ -319,20 +320,36 @@ namespace MyPhamTrueLife.BLL.Implement
             var comment = await _unitOfWork.Repository<InfoComent>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().ToListAsync();
             if (comment != null)
             {
-                info.listComent = new List<InfoComent>();
+                info.listComent = new List<InfoCommentClient>();
                 foreach (var item in comment)
                 {
-                    info.listComent.Add(item);
+                    var infoNew = new InfoCommentClient();
+                    PropertyCopier<InfoComent, InfoCommentClient>.Copy(item, infoNew);
+                    var userInfo = await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().FirstOrDefaultAsync();
+                    if (userInfo != null)
+                    {
+                        infoNew.FullName = userInfo.FullName;
+                        infoNew.Avatar = userInfo.Avatar;
+                        info.listComent.Add(infoNew);
+                    }
                 }
             }
             //Danh sách đánh giá 
             var evaluate = await _unitOfWork.Repository<InfoEvaluate>().Where(x => x.ProductId.Equals(product.ProductId)).AsNoTracking().ToListAsync();
             if (evaluate != null)
             {
-                info.listEvaluate = new List<InfoEvaluate>();
+                info.listEvaluate = new List<InfoEvaluateClient>();
                 foreach (var item in evaluate)
                 {
-                    info.listEvaluate.Add(item);
+                    var infoNew = new InfoEvaluateClient();
+                    PropertyCopier<InfoEvaluate, InfoEvaluateClient>.Copy(item, infoNew);
+                    var userInfo = await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().FirstOrDefaultAsync();
+                    if (userInfo != null)
+                    {
+                        infoNew.FullName = userInfo.FullName;
+                        infoNew.Avatar = userInfo.Avatar;
+                        info.listEvaluate.Add(infoNew);
+                    }
                 }
             }
             info.QuantityOrder = await _unitOfWork.Repository<InfoOrderDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(product.ProductId)).AsNoTracking().SumAsync(z => z.Amount);

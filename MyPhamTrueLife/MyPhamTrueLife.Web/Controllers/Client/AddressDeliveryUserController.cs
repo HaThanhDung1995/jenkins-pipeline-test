@@ -88,16 +88,16 @@ namespace MyPhamTrueLife.Web.Controllers.Client
         [HttpPost]
         [Route("ListInfoAddressDeliveryUser")]
         [AllowAnonymous]
-        public async Task<ResponseResult<List<InfoAddressDeliveryUser>>> ListInfoAddressDeliveryUser(int id)
+        public async Task<ResponseResult<List<IndoAddressDeliveryReq>>> ListInfoAddressDeliveryUser(int id)
         {
             try
             {
                 var result = await _addressDeliveryUserService.ListInfoAddressDeliveryUserAsync(id);
-                return new ResponseResult<List<InfoAddressDeliveryUser>>(RetCodeEnum.Ok, "Danh sách địa chỉ giao hàng.", result);
+                return new ResponseResult<List<IndoAddressDeliveryReq>>(RetCodeEnum.Ok, "Danh sách địa chỉ giao hàng.", result);
             }
             catch (Exception ex)
             {
-                return new ResponseResult<List<InfoAddressDeliveryUser>>(RetCodeEnum.ApiError, ex.Message, null);
+                return new ResponseResult<List<IndoAddressDeliveryReq>>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
     }

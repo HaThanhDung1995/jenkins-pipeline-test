@@ -60,8 +60,8 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public string Describe { get; set; }
         public List<string> listImage { get; set; }
         public List<ListProductSelling> listProductRelateTo { get; set; }
-        public List<InfoComent> listComent { get; set; }
-        public List<InfoEvaluate> listEvaluate { get; set; }
+        public List<InfoCommentClient> listComent { get; set; }
+        public List<InfoEvaluateClient> listEvaluate { get; set; }
         public int? QuantityOrder { get; set; }
     }
 

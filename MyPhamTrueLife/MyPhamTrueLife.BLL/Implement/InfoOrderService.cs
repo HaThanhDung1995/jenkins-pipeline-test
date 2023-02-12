@@ -109,6 +109,18 @@ namespace MyPhamTrueLife.BLL.Implement
                     await _unitOfWork.Repository<InfoOrderDetail>().AddAsync(cart);
                 }
                 await _unitOfWork.SaveChangeAsync();
+
+                //Xóa sản phẩm khỏi giỏ hàng
+                foreach (var item1 in value.listCart)
+                {
+                    var cart = await _unitOfWork.Repository<InfoCart>().Where(x => x.CartId == item1.CartId).AsNoTracking().FirstOrDefaultAsync();
+                    if (cart != null)
+                    {
+                        cart.DeleteFlag = true;
+                        _unitOfWork.Repository<InfoCart>().Update(cart);
+                        await _unitOfWork.SaveChangeAsync();
+                    }
+                }
             }
             return true;
         }
