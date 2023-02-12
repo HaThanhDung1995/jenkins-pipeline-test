@@ -66,11 +66,13 @@ namespace MyPhamTrueLife.BLL.Implement
 
         public async Task<bool> ThemDanhSachChiTietNhapHang(List<InfoDetailImportSell> value, int staffId, int importSellId)
         {
+            var price = 0;
             var supplier = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId.Equals(importSellId)).AsNoTracking().FirstOrDefaultAsync();
             if (supplier != null)
             {
                 foreach (var item in value)
                 {
+                    price += (item.Amount.Value * item.Prize.Value);
                     item.ImportSellId = importSellId;
                     item.CreateAt = DateTime.Now;
                     item.CreateUser = staffId;
@@ -78,6 +80,12 @@ namespace MyPhamTrueLife.BLL.Implement
                     await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(item);
                 }
                 await _unitOfWork.SaveChangeAsync();
+
+                supplier.DeleteFlag = false;
+                supplier.UpdateAt = DateTime.Now;
+                supplier.UpdateUser = staffId;
+                supplier.Total = price;
+                _unitOfWork.Repository<InfoImportSell>().Update(supplier);
                 return true;
             }
             return false;
