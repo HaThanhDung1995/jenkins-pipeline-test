@@ -86,6 +86,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 supplier.UpdateUser = staffId;
                 supplier.Total = price;
                 _unitOfWork.Repository<InfoImportSell>().Update(supplier);
+                await _unitOfWork.SaveChangeAsync();
                 return true;
             }
             return false;
@@ -124,6 +125,53 @@ namespace MyPhamTrueLife.BLL.Implement
             listInfo = listInfo.Skip(start).Take(limit).ToList();
             listData.ListData = listInfo;
             return listData;
+        }
+
+        public async Task<bool> CapNhatTrangThaiDonNhapHang(int importSellId, int staffId, string Status)
+        {
+            var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
+            if (importSell != null)
+            {
+                importSell.DeleteFlag = false;
+                importSell.UpdateAt = DateTime.Now;
+                importSell.UpdateUser = staffId;
+                importSell.Status = Status;
+                _unitOfWork.Repository<InfoImportSell>().Update(importSell);
+                await _unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> CapNhatTrangThaiThanhToanDonNhapHang(int importSellId, int staffId)
+        {
+            var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
+            if (importSell != null)
+            {
+                importSell.DeleteFlag = false;
+                importSell.UpdateAt = DateTime.Now;
+                importSell.UpdateUser = staffId;
+                importSell.IsPay = true;
+                _unitOfWork.Repository<InfoImportSell>().Update(importSell);
+                await _unitOfWork.SaveChangeAsync();
+                return true;
+            }
+            return false;
+        }
+        public async Task<bool> CapNhatDonNhapHangVaoKho(int importSellId, int staffId)
+        {
+            var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
+            if (importSell != null)
+            {
+                importSell.DeleteFlag = false;
+                importSell.UpdateAt = DateTime.Now;
+                importSell.UpdateUser = staffId;
+                importSell.IsAddTosTock = true;
+                _unitOfWork.Repository<InfoImportSell>().Update(importSell);
+                await _unitOfWork.SaveChangeAsync();
+                //Cập nhật số lượng vào kho
+                return true;
+            }
+            return false;
         }
     }
 }
