@@ -47,6 +47,24 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             try
             {
                 value.Status = "DADUYET";
+                value.IsPay = null;
+                var result = await _infoOrderService.UpdateOrderAsync(value);
+                return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
+
+        [Route("cap-nhat-trang-thai-don-hang")]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<ResponseResult<string>> UpdateTrangThaiDonHang([FromBody] InfoOrderUpdateStatus value)
+        {
+            try
+            {
+                value.IsPay = null;
                 var result = await _infoOrderService.UpdateOrderAsync(value);
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
@@ -63,6 +81,7 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         {
             try
             {
+                value.Status = string.Empty;
                 var result = await _infoOrderService.UpdateOrderAsync(value);
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
