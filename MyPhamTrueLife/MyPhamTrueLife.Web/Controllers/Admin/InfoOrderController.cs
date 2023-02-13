@@ -49,6 +49,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 value.Status = "DADUYET";
                 value.IsPay = null;
                 var result = await _infoOrderService.UpdateOrderAsync(value);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật trạng thái thất bại", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
@@ -66,6 +70,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             {
                 value.IsPay = null;
                 var result = await _infoOrderService.UpdateOrderAsync(value);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật trạng thái thất bại", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
@@ -83,6 +91,10 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             {
                 value.Status = string.Empty;
                 var result = await _infoOrderService.UpdateOrderAsync(value);
+                if (result != true)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Cập nhật trạng thái thất bại", result.ToString());
+                }
                 return new ResponseResult<string>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result.ToString());
             }
             catch (Exception ex)
