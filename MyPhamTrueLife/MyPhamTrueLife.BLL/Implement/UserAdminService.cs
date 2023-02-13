@@ -169,10 +169,10 @@ namespace MyPhamTrueLife.BLL.Implement
                     infoDetailCalenda1.DeleteFlag = false;
                     await _unitOfWork.Repository<InfoDetailCalendar>().AddAsync(infoDetailCalenda1);
                     await _unitOfWork.SaveChangesAsync();
+                    return true;
                 }
             }
-            await _unitOfWork.SaveChangesAsync();
-            return true;
+            return false;
         }
 
         public async Task<ResponseList> LayLichLamViecChoCaHai(int page = 1, int limit = 25)
