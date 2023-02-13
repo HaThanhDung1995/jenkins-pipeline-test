@@ -161,6 +161,8 @@ namespace MyPhamTrueLife.BLL.Implement
                 var addRess = new IndoAddressDeliveryReq();
                 PropertyCopier<InfoAddressDeliveryUser, IndoAddressDeliveryReq>.Copy(infoAdd, addRess);
                 item.infoAddressDeliveryUser = new IndoAddressDeliveryReq();
+                addRess.ProvinceName = await _unitOfWork.Repository<InfoProvince>().Where(x => x.DeleteFlag != true && x.ProvinceId == addRess.ProvinceId).AsNoTracking().Select(z=>z.Name).FirstOrDefaultAsync();
+                addRess.DistrictName = await _unitOfWork.Repository<InfoDistrict>().Where(x => x.DeleteFlag != true && x.DistrictId == addRess.DistrictId).AsNoTracking().Select(z => z.Name).FirstOrDefaultAsync();
                 item.infoAddressDeliveryUser = addRess;
 
             }

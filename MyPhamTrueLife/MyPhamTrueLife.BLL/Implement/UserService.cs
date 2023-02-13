@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -133,6 +134,14 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 item.FullName = item.UserId == null ? "" : await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == item.UserId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
                 item.FullNameStaff = item.StaffId == null ? "" : await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().Select(z => z.FullName).FirstOrDefaultAsync();
+                var infoAdd = item.AddressDeliveryId == null ? null : await _unitOfWork.Repository<InfoAddressDeliveryUser>().Where(x => x.DeleteFlag != true && x.AddressDeliveryId == item.AddressDeliveryId.Value).AsNoTracking().FirstOrDefaultAsync();
+
+                var addRess = new IndoAddressDeliveryReq();
+                PropertyCopier<InfoAddressDeliveryUser, IndoAddressDeliveryReq>.Copy(infoAdd, addRess);
+                item.infoAddressDeliveryUser = new IndoAddressDeliveryReq();
+                addRess.ProvinceName = await _unitOfWork.Repository<InfoProvince>().Where(x => x.DeleteFlag != true && x.ProvinceId == addRess.ProvinceId).AsNoTracking().Select(z => z.Name).FirstOrDefaultAsync();
+                addRess.DistrictName = await _unitOfWork.Repository<InfoDistrict>().Where(x => x.DeleteFlag != true && x.DistrictId == addRess.DistrictId).AsNoTracking().Select(z => z.Name).FirstOrDefaultAsync();
+                item.infoAddressDeliveryUser = addRess;
             }
             var totalRows = listData.Count();
             result.Paging = new Paging(totalRows, page, limit);
