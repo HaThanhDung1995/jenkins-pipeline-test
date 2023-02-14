@@ -82,21 +82,21 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
             }
         }
 
-        //[HttpPost]
-        //[Route("lay-lich-lam-viec-admin")]
-        //[AllowAnonymous]
-        //public async Task<ResponseResult<List<LichTaoViecChoAdmin>>> LayLichLamViecAdmin(DateTime? dateTime)
-        //{
-        //    try
-        //    {
-        //        var result = await _userAdmin.LayLichLamDeDangKy(dateTime);
-        //        return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.ApiError, ex.Message, null);
-        //    }
-        //}
+        [HttpPost]
+        [Route("lay-lich-lam-viec-de-dang-ky")]
+        [AllowAnonymous]
+        public async Task<ResponseResult<List<LichTaoViecChoAdmin>>> LayLichLamViecAdmin(int calendarId)
+        {
+            try
+            {
+                var result = await _userAdmin.LayLichLamDeDangKy(calendarId);
+                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<List<LichTaoViecChoAdmin>>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
 
         [HttpPost]
         [Route("lay-danh-sach-lich-lam-viec")]

@@ -254,36 +254,35 @@ namespace MyPhamTrueLife.BLL.Implement
             return listData;
         }
 
-        //public async Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(DateTime? dateAt)
-        //{
-        //    var listInfo = new List<LichTaoViecChoAdmin>();
-        //    if (dateAt == null) dateAt = DateTime.Now;
-        //    var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
-        //    if (infoCalenda == null)
-        //    {
-        //        return listInfo;
-        //    }
-        //    var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
-        //    for (int i = 1; i <= tmp; i++)
-        //    {
-        //        var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
-        //        if (infoDetail != null && infoDetail.Count > 0)
-        //        {
-        //            var info = new LichTaoViecChoAdmin();
-        //            info.infoDetailCalendar = infoDetail.FirstOrDefault();
-        //            if (infoDetail.Count >= 5)
-        //            {
-        //                info.Status = true;
-        //            }
-        //            else
-        //            {
-        //                info.Status = false;
-        //            }
-        //            listInfo.Add(info);
-        //        }
-        //    }
-        //    return listInfo;
-        //}
+        public async Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(int calendarId)
+        {
+            var listInfo = new List<LichTaoViecChoAdmin>();
+            var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == calendarId).AsNoTracking().FirstOrDefaultAsync();
+            if (infoCalenda == null)
+            {
+                return listInfo;
+            }
+            var tmp = DateTime.DaysInMonth(infoCalenda.YearI.Value, infoCalenda.MonthI.Value);
+            for (int i = 1; i <= tmp; i++)
+            {
+                var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
+                if (infoDetail != null && infoDetail.Count > 0)
+                {
+                    var info = new LichTaoViecChoAdmin();
+                    info.infoDetailCalendar = infoDetail.FirstOrDefault();
+                    if (infoDetail.Count >= 5)
+                    {
+                        info.Status = true;
+                    }
+                    else
+                    {
+                        info.Status = false;
+                    }
+                    listInfo.Add(info);
+                }
+            }
+            return listInfo;
+        }
 
         public async Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId)
         {
