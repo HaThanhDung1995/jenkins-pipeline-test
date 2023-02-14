@@ -188,6 +188,7 @@ namespace MyPhamTrueLife.BLL.Implement
             }
             if (value.IsPay != null)
             {
+                order.Status = "DAGIAO";
                 order.IsPay = value.IsPay;
             }
             order.UpdateAt = DateTime.Now;
