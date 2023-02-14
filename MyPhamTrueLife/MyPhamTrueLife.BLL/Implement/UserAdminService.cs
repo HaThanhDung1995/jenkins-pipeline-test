@@ -270,6 +270,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 {
                     var info = new LichTaoViecChoAdmin();
                     info.infoDetailCalendar = infoDetail.FirstOrDefault();
+                    info.DetailCalendarId = info.infoDetailCalendar.DetailCalendarId;
                     if (infoDetail.Count >= 5)
                     {
                         info.Status = true;

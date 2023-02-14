@@ -36,6 +36,7 @@ namespace MyPhamTrueLife.DAL.Models.Utils
 
     public class LichTaoViecChoAdmin
     {
+        public int DetailCalendarId { get; set; }
         public InfoDetailCalendar infoDetailCalendar { get; set; }
         public bool? Status { get; set; }
     }
