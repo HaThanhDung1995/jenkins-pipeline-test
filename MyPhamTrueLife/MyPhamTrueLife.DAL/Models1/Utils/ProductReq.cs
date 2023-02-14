@@ -77,6 +77,7 @@ namespace MyPhamTrueLife.DAL.Models.Utils
         public string StatusProduct { get; set; }
         public int? NatureId { get; set; }
         public string NatureName { get; set; }
+        public int? TypeProductId { get; set; }
         public List<CapacityProductRes> listCapacityProductRes { get; set; }
         public string Describe { get; set; }
         public List<InfoImageProduct> listImage { get; set; }

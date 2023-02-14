@@ -194,6 +194,7 @@ namespace MyPhamTrueLife.BLL.Implement
             info.StatusProduct = product.StatusProduct;
             info.NatureId = product.NatureId;
             info.Describe = product.Describe;
+            info.TypeProductId = product.TypeProductId;
             if (product.NatureId != null)
             {
                 info.NatureName = await _unitOfWork.Repository<InfoNature>().Where(x => x.DeleteFlag != true && x.NatureId == product.NatureId).AsNoTracking().Select(z=>z.NatureName).FirstOrDefaultAsync();
