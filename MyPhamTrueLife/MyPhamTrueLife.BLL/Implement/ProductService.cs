@@ -220,43 +220,35 @@ namespace MyPhamTrueLife.BLL.Implement
         {
             var result = new ResponseList();
             var listProductSeling = new List<ListProductSelling>();
-            //var listProduct = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true).AsNoTracking().ToListAsync();
-            //if (listProduct != null)
-            //{
-            //    //Lấy danh sách sản phẩm theo tên sản phẩm
-            //    if (!string.IsNullOrEmpty(value.ProductName))
-            //    {
-            //        listProduct = listProduct.Where(x => x.ProductName.Contains(value.ProductName)).ToList();
-            //    }
-            //    //Lấy danh sách sản phẩm theo giá sản phẩm
-            //    //Lấy danh sách sản phẩm theo loại sản phẩm
-            //    if (value.ProductTypeId > 0)
-            //    {
-            //        listProduct = listProduct.Where(x => x.TypeProductId.Equals(value.ProductTypeId)).ToList();
-            //    }
-            //    if (listProduct != null && listProduct.Count > 0)
-            //    {
-            //        foreach (var item in listProduct)
-            //        {
-            //            var product = new ListProductSelling();
-            //            var listPrice = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().OrderByDescending(x => x.StartAt).ToListAsync();
-            //            if (listPrice != null || listPrice.Count > 0)
-            //            {
-            //                product.Price = listPrice[0].Price.Value;
-            //                product.ProductName = item.ProductName;
-            //                product.ProductId = item.ProductId;
-            //                product.Avatar = item.Avatar;
-            //                product.PriceDiscount = product.Price;
-            //                listProductSeling.Add(product);
-            //            }
-            //        }
-
-            //        var totalRows = listProductSeling.Count();
-            //        result.Paging = new Paging(totalRows, page, limit);
-            //        int start = result.Paging.start;
-            //        listProductSeling = listProductSeling.Skip(start).Take(limit).ToList();
-            //    }
-            //}
+            var supplier = await _unitOfWork.Repository<InfoSupplier>().Where(x => x.DeleteFlag != true && x.SupplierId == supplierId).AsNoTracking().FirstOrDefaultAsync();
+            if (supplier != null)
+            {
+                var listProduct = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true).AsNoTracking().ToListAsync();
+                if (listProduct != null)
+                {
+                    if (supplier.TypeProductId > 0)
+                    {
+                        listProduct = listProduct.Where(x => x.TypeProductId.Equals(supplier.TypeProductId)).ToList();
+                    }
+                    if (listProduct != null && listProduct.Count > 0)
+                    {
+                        foreach (var item in listProduct)
+                        {
+                            var product = new ListProductSelling();
+                            var listPrice = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(item.ProductId)).AsNoTracking().OrderByDescending(x => x.StartAt).ToListAsync();
+                            if (listPrice != null || listPrice.Count > 0)
+                            {
+                                product.Price = listPrice[0].Price.Value;
+                                product.ProductName = item.ProductName;
+                                product.ProductId = item.ProductId;
+                                product.Avatar = item.Avatar;
+                                product.PriceDiscount = product.Price;
+                                listProductSeling.Add(product);
+                            }
+                        }
+                    }
+                }
+            }
             result.ListData = listProductSeling;
             return listProductSeling;
         }
