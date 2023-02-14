@@ -13,6 +13,7 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<ResponseList> TopSixNewProducts();
         Task<ResponseList> TopSixProductPromotion();
         Task<ResponseList> ShowListProductFilter(ProductFilterRequest value, int page = 1, int limit = 25);
+        Task<List<ListProductSelling>> ShowListProductFilterSupplier(int supplierId);
         Task<ProductDetail> ProductDetailAsync(int id, int? nature, int? capacity);
     }
 }

@@ -165,6 +165,27 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 return new ResponseResult<string>(RetCodeEnum.ApiError, ex.Message, null);
             }
         }
+
+        //Danh sách tất cả sản phẩm
+        [Route("danh-sach-san-pham-theo-nha-cung-cap")]
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ResponseResult<List<ListProductSelling>>> GetList(int supplierId)
+        {
+            try
+            {
+                var result = await _productService.ShowListProductFilterSupplier(supplierId);
+                if (result == null)
+                {
+                    return new ResponseResult<List<ListProductSelling>>(RetCodeEnum.ApiError, "Danh sách tất cả sản phẩm và filter.", null);
+                }
+                return new ResponseResult<List<ListProductSelling>>(RetCodeEnum.Ok, RetCodeEnum.Ok.ToString(), result);
+            }
+            catch (Exception ex)
+            {
+                return new ResponseResult<List<ListProductSelling>>(RetCodeEnum.ApiError, ex.Message, null);
+            }
+        }
         //[Route("them-hinh-anh-san-pham")]
         //[HttpPost]
         //[AllowAnonymous]
