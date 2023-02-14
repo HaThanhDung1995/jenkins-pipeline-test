@@ -145,11 +145,11 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
         [HttpPost]
         [Route("lay-lich-lam-viec-cho-nhan-vien")]
         [AllowAnonymous]
-        public async Task<ResponseResult<List<LichLamViecCuaNhanVien>>> LayLichLamViecChoNhanVien(int staffId, DateTime? dateAt)
+        public async Task<ResponseResult<List<LichLamViecCuaNhanVien>>> LayLichLamViecChoNhanVien(int staffId, int? month, int? year)
         {
             try
             {
-                var result = await _userAdmin.LayLichLamCuaNhanVien(staffId, dateAt);
+                var result = await _userAdmin.LayLichLamCuaNhanVien(staffId, month, year);
                 return new ResponseResult<List<LichLamViecCuaNhanVien>>(RetCodeEnum.Ok, "Lấy lịch làm việc thành công", result);
             }
             catch (Exception ex)

@@ -343,7 +343,7 @@ namespace MyPhamTrueLife.BLL.Implement
             return 0;
         }
 
-        public async Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, DateTime? dateAt)
+        public async Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, int? month, int? year)
         {
             var listInfo = new List<LichLamViecCuaNhanVien>();
             var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId).AsNoTracking().FirstOrDefaultAsync();
@@ -351,12 +351,9 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 var staff = new InfoStaffReqNew();
                 PropertyCopier<InfoStaff, InfoStaffReqNew>.Copy(infoStaff, staff);
-                if (dateAt == null)
-                {
-                    dateAt = DateTime.Now;
-                }
-                var tmp = DateTime.DaysInMonth(dateAt.Value.Year, dateAt.Value.Month);
-                var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == dateAt.Value.Month && x.YearI == dateAt.Value.Year).AsNoTracking().FirstOrDefaultAsync();
+
+                var tmp = DateTime.DaysInMonth(year.Value, month.Value);
+                var infoCalenda = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.MonthI == month.Value && x.YearI == year.Value).AsNoTracking().FirstOrDefaultAsync();
 
                 if (infoCalenda != null)
                 {

@@ -21,7 +21,7 @@ namespace MyPhamTrueLife.BLL.Interface
         Task<ResponseList> XemChiTietLichLamViecChoCaHai(int userId, int? calendarId, int page = 1, int limit = 25);
         Task<List<LichTaoViecChoAdmin>> LayLichLamDeDangKy(int calendarId);
         Task<int> DangKyLichLamViecCuaNhanVien(InfoDetailCalendar value, int staffId);
-        Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, DateTime? dateAt);
+        Task<List<LichLamViecCuaNhanVien>> LayLichLamCuaNhanVien(int staffId, int? month, int? year);
         Task<int> DiemDanhVaKetCaCuaNhanVien(int? staffId, int? detailcalendarId, bool? IsAtendan);
     }
 }
