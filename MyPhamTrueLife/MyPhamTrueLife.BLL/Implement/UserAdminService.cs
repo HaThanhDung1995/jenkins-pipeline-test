@@ -321,7 +321,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 return 2;
             }
             var infoDetailCalendar1 = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.StaffId == x.StaffId.Value && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == value.ShiftI).AsNoTracking().FirstOrDefaultAsync();
-            if (infoDetailCalendar1 == null)
+            if (infoDetailCalendar1 != null)
             {
                 return 3;
             }
