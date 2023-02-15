@@ -40,12 +40,15 @@ namespace MyPhamTrueLife.BLL.Implement
                 }    
 
             }
-
-            if (value == null || value.UserId <= 0 || quantity <= 0)
+            var cartNew = await _unitOfWork.Repository<InfoCart>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(value.ProductId) && x.CapacityId == value.CapacityId).AsNoTracking().FirstOrDefaultAsync();
+            if (cartNew != null)
+            {
+                quantity += cartNew.Quantity.Value;
+            }
+            if (product.Amount < quantity)
             {
                 return false;
             }
-            var cartNew = await _unitOfWork.Repository<InfoCart>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(value.ProductId) && x.CapacityId == value.CapacityId).AsNoTracking().FirstOrDefaultAsync();
             if (cartNew != null)
             {
                 cartNew.Quantity = cartNew.Quantity + value.Quantity;

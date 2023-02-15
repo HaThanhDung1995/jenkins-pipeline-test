@@ -263,7 +263,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 return listInfo;
             }
             var tmp = DateTime.DaysInMonth(infoCalenda.YearI.Value, infoCalenda.MonthI.Value);
-            for (int i = 1; i <= tmp; i++)
+            for (int i = DateTime.Now.Day; i <= tmp; i++)
             {
                 var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
                 if (infoDetail != null && infoDetail.Count > 0)
