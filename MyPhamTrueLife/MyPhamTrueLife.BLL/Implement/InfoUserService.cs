@@ -51,6 +51,10 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 return false;
             }
+            if (!string.IsNullOrEmpty(value.Password))
+            {
+                value.Password = FunctionUtils.CreateSHA256(!string.IsNullOrEmpty(value.UserName) ? value.UserName : value.UserName, value.Password);
+            }
             value.UpdateAt = DateTime.Now;
             value.UpdateUser = value.UserId;
             value.DeleteFlag = false;
