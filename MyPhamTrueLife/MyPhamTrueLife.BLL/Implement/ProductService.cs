@@ -79,7 +79,7 @@ namespace MyPhamTrueLife.BLL.Implement
                         var inf = new CountProduct();
                         inf.ProductId = ite.ProductId;
                         inf.Quantity = (int)await _unitOfWork.Repository<InfoOrderDetail>().Where(x => x.DeleteFlag != true && x.ProductId.Equals(ite.ProductId)).AsNoTracking().SumAsync(z => z.Amount);
-                        listCountProduct.Add(ite);
+                        listCountProduct.Add(inf);
                     }
                     listCountProduct = listCountProduct.OrderByDescending(x => x.Quantity).Take(6).ToList();
                     foreach (var item in listCountProduct)
