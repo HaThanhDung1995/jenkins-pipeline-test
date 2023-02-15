@@ -21,7 +21,27 @@ namespace MyPhamTrueLife.BLL.Implement
         //Thêm sản phẩm vào giỏ
         public async Task<bool> AddProductToCart(InfoCartRequest value)
         {
-            if (value == null || value.UserId <= 0)
+            int quantity = 0;
+            var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == value.ProductId).AsNoTracking().FirstOrDefaultAsync();
+            if (product.IsExpiry != true)
+            {
+                quantity = product.Amount.Value;
+            }
+            else
+            {
+                
+                if (value.CapacityId != null)
+                {
+                    quantity = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == value.ProductId && x.CapacityId == value.CapacityId).AsNoTracking().Select(x => x.Amount.Value).SumAsync();
+                }
+                else
+                {
+                    quantity = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == value.ProductId).AsNoTracking().Select(x=>x.Amount.Value).SumAsync();
+                }    
+
+            }
+
+            if (value == null || value.UserId <= 0 || quantity <= 0)
             {
                 return false;
             }
@@ -80,12 +100,34 @@ namespace MyPhamTrueLife.BLL.Implement
         //Cộng số lượng sản phẩm trong cart
         public async Task<bool> PlusProductToCart(int cartId)
         {
-            if (cartId <= 0)
+            
+
+            if (cartId <= 0 )
             {
                 return false;
             }
             var cart = await _unitOfWork.Repository<InfoCart>().Where(x => x.DeleteFlag != true && x.CartId.Equals(cartId)).AsNoTracking().FirstOrDefaultAsync();
-            if (cart == null)
+            int quantity = 0;
+            var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == cart.ProductId).AsNoTracking().FirstOrDefaultAsync();
+            if (product.IsExpiry != true)
+            {
+                quantity = product.Amount.Value;
+            }
+            else
+            {
+
+                if (cart.CapacityId != null)
+                {
+                    quantity = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == cart.ProductId && x.CapacityId == cart.CapacityId).AsNoTracking().Select(x => x.Amount.Value).SumAsync();
+                }
+                else
+                {
+                    quantity = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == cart.ProductId).AsNoTracking().Select(x => x.Amount.Value).SumAsync();
+                }
+
+            }
+
+            if (cart == null || quantity <= 0)
             {
                 return false;
             }
