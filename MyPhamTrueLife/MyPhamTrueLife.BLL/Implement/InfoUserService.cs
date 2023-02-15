@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyPhamTrueLife.BLL.Ultil;
 
 namespace MyPhamTrueLife.BLL.Implement
 {
@@ -51,14 +52,17 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 return false;
             }
+            var info = await _unitOfWork.Repository<InfoUser>().Where(x => x.DeleteFlag != true && x.UserId == value.UserId).AsNoTracking().FirstOrDefaultAsync();
             if (!string.IsNullOrEmpty(value.Password))
             {
                 value.Password = FunctionUtils.CreateSHA256(!string.IsNullOrEmpty(value.UserName) ? value.UserName : value.UserName, value.Password);
             }
-            value.UpdateAt = DateTime.Now;
-            value.UpdateUser = value.UserId;
-            value.DeleteFlag = false;
-            _unitOfWork.Repository<InfoUser>().UpdateRange(value);
+            PropertyCopier<InfoUser, InfoUser>.Copy(value, info);
+
+            info.UpdateAt = DateTime.Now;
+            info.UpdateUser = value.UserId;
+            info.DeleteFlag = false;
+            _unitOfWork.Repository<InfoUser>().UpdateRange(info);
             await _unitOfWork.SaveChangeAsync();
             return true;
         }
