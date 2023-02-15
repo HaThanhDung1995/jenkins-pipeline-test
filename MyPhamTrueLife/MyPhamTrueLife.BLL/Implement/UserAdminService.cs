@@ -269,7 +269,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 if (infoDetail != null && infoDetail.Count > 0)
                 {
                     var info = new LichTaoViecChoAdmin();
-                    info.infoDetailCalendar = infoDetail.FirstOrDefault();
+                    info.infoDetailCalendar = infoDetail.FirstOrDefault(z=>z.ShiftI == 1);
                     info.DetailCalendarId = info.infoDetailCalendar.DetailCalendarId;
                     if (infoDetail.Count >= 5)
                     {
@@ -280,6 +280,18 @@ namespace MyPhamTrueLife.BLL.Implement
                         info.Status = false;
                     }
                     listInfo.Add(info);
+                    var info1 = new LichTaoViecChoAdmin();
+                    info.infoDetailCalendar = infoDetail.FirstOrDefault(z => z.ShiftI == 2);
+                    info.DetailCalendarId = info.infoDetailCalendar.DetailCalendarId;
+                    if (infoDetail.Count >= 5)
+                    {
+                        info1.Status = true;
+                    }
+                    else
+                    {
+                        info1.Status = false;
+                    }
+                    listInfo.Add(info1);
                 }
             }
             return listInfo;
