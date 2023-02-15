@@ -109,6 +109,10 @@ namespace MyPhamTrueLife.BLL.Implement
             var cart = await _unitOfWork.Repository<InfoCart>().Where(x => x.DeleteFlag != true && x.CartId.Equals(cartId)).AsNoTracking().FirstOrDefaultAsync();
             int quantity = 0;
             var product = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == cart.ProductId).AsNoTracking().FirstOrDefaultAsync();
+            if (product != null)
+            {
+                quantity += cart.Quantity.Value;
+            }
             if (product.IsExpiry != true)
             {
                 quantity = product.Amount.Value;

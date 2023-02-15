@@ -169,6 +169,25 @@ namespace MyPhamTrueLife.BLL.Implement
                 _unitOfWork.Repository<InfoImportSell>().Update(importSell);
                 await _unitOfWork.SaveChangeAsync();
                 //Cập nhật số lượng vào kho
+                var detail = await _unitOfWork.Repository<InfoDetailImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSell.ImportSellId).AsNoTracking().ToListAsync();
+                foreach (var item in detail)
+                {
+                    var infoProduct = await _unitOfWork.Repository<InfoProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().FirstOrDefaultAsync();
+                    if (infoProduct != null)
+                    {
+                        infoProduct.Amount += item.Amount;
+                        infoProduct.StatusProduct = "CONHANG";
+                        _unitOfWork.Repository<InfoProduct>().Update(infoProduct);
+                        await _unitOfWork.SaveChangeAsync();
+                        if (infoProduct.IsExpiry == true)
+                        {
+                            var expiry = await _unitOfWork.Repository<InfoExpiryProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().OrderByDescending(x=>x.CreateAt).FirstOrDefaultAsync();
+                            expiry.Amount += item.Amount;
+                            _unitOfWork.Repository<InfoExpiryProduct>().Update(expiry);
+                            await _unitOfWork.SaveChangeAsync();
+                        }
+                    }
+                }
                 return true;
             }
             return false;
