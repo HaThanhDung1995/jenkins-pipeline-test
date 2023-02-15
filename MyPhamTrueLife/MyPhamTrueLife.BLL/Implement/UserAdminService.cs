@@ -371,7 +371,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 {
                     for (int i = 1; i <= tmp; i++)
                     {
-                        var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId).AsNoTracking().ToListAsync();
+                        var infoDetail = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.DayI == i && x.CalendarId == infoCalenda.CalendarId && x.StaffId == staff.StaffId).AsNoTracking().ToListAsync();
                         if (infoDetail != null && infoDetail.Count > 0)
                         {
                             foreach (var item in infoDetail)
