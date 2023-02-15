@@ -130,6 +130,14 @@ namespace MyPhamTrueLife.Web.Controllers.Admin
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, thông tin truyền vào bị trống", result.ToString());
                 }
+                if (result == 3)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, bạn đã đăng ký ca làm việc này rồi", result.ToString());
+                }
+                if (result == 4)
+                {
+                    return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, không đăng ký ngày quá khứ", result.ToString());
+                }
                 if (result == -1)
                 {
                     return new ResponseResult<string>(RetCodeEnum.ApiError, "Đăng ký lịch làm việc thất bại, loại nhân viên đã đủ cho ca làm việc", result.ToString());

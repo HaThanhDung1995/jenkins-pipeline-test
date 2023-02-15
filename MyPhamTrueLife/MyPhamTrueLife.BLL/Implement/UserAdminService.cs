@@ -303,10 +303,27 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 return 1;
             }
+
+            var calendar = await _unitOfWork.Repository<InfoCalendar>().Where(x => x.DeleteFlag != true && x.CalendarId == value.CalendarId).AsNoTracking().FirstOrDefaultAsync();
+            if (calendar == null)
+            {
+                return 1;
+            }
+            DateTime date = new DateTime(calendar.YearI.Value, calendar.MonthI.Value, value.DayI.Value, 0, 0, 0);
+            if (date.Date < DateTime.Now.Date)
+            {
+                return 4;
+            }
+
             var infoStaff = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == staffId).AsNoTracking().FirstOrDefaultAsync();
             if (infoStaff == null)
             {
                 return 2;
+            }
+            var infoDetailCalendar1 = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && x.StaffId == x.StaffId.Value && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == value.ShiftI).AsNoTracking().FirstOrDefaultAsync();
+            if (infoDetailCalendar1 == null)
+            {
+                return 3;
             }
             var listInfoStaffId = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff.PositionStaffId).AsNoTracking().Select(z => z.StaffId).ToListAsync();
             var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && listInfoStaffId.Contains(x.StaffId.Value) && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == value.ShiftI).AsNoTracking().CountAsync();
