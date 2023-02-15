@@ -309,7 +309,7 @@ namespace MyPhamTrueLife.BLL.Implement
                 return 2;
             }
             var listInfoStaffId = await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.PositionStaffId == infoStaff.PositionStaffId).AsNoTracking().Select(z => z.StaffId).ToListAsync();
-            var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && listInfoStaffId.Contains(x.StaffId.Value)).AsNoTracking().CountAsync();
+            var infoDetailCalendar = await _unitOfWork.Repository<InfoDetailCalendar>().Where(x => x.DeleteFlag != true && listInfoStaffId.Contains(x.StaffId.Value) && x.CalendarId == value.CalendarId && x.DayI == value.DayI && x.ShiftI == value.ShiftI).AsNoTracking().CountAsync();
             if (infoStaff.PositionStaffId == 3)
             {
                 //Nhân viên bán hàng
@@ -338,7 +338,7 @@ namespace MyPhamTrueLife.BLL.Implement
             infoDetailCalenda1.CalendarId = value.CalendarId;
             infoDetailCalenda1.DayI = value.DayI;
             infoDetailCalenda1.ShiftI = value.ShiftI;
-            infoDetailCalenda1.StaffId = value.StaffId;
+            infoDetailCalenda1.StaffId = staffId;
             infoDetailCalenda1.CreateAt = DateTime.Now;
             infoDetailCalenda1.CreateUser = staffId;
             infoDetailCalenda1.DeleteFlag = false;
