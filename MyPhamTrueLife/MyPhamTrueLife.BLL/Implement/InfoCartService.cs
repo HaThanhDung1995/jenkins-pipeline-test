@@ -131,7 +131,7 @@ namespace MyPhamTrueLife.BLL.Implement
 
             }
 
-            if (cart == null || quantity <= 0)
+            if (cart == null || quantity <= 0 || quantity > product.Amount)
             {
                 return false;
             }
