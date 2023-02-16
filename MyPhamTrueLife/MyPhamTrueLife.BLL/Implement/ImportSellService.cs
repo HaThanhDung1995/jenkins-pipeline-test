@@ -56,6 +56,11 @@ namespace MyPhamTrueLife.BLL.Implement
             var listData = new ResponseList();
             listData.ListData = null;
             var listInfoImportSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true).AsNoTracking().ToListAsync();
+            foreach (var item in listInfoImportSell)
+            {
+                item.Supplier = item.SupplierId != null ? await _unitOfWork.Repository<InfoSupplier>().Where(x=>x.DeleteFlag != true && x.SupplierId == item.SupplierId).AsNoTracking().FirstOrDefaultAsync() : null;
+            }
+            
             var totalRows = listInfoImportSell.Count();
             listData.Paging = new Paging(totalRows, page, limit);
             int start = listData.Paging.start;
