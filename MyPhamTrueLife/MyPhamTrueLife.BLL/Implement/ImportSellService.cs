@@ -81,17 +81,19 @@ namespace MyPhamTrueLife.BLL.Implement
                     var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().FirstOrDefaultAsync();
                     if (product != null)
                     {
+                        var detaial = new InfoDetailImportSell();
                         int priceI = product.Price.Value + 10000;
                         price += (item.Amount.Value * priceI);
-                        item.ImportSellId = importSellId;
-                        item.CreateAt = DateTime.Now;
-                        item.CreateUser = staffId;
-                        item.DeleteFlag = false;
-                        await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(item);
+                        detaial.Prize = priceI;
+                        detaial.Amount = item.Amount;
+                        detaial.ImportSellId = importSellId;
+                        detaial.CreateAt = DateTime.Now;
+                        detaial.CreateUser = staffId;
+                        detaial.DeleteFlag = false;
+                        await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(detaial);
+                        await _unitOfWork.SaveChangeAsync();
                     }
                 }
-                await _unitOfWork.SaveChangeAsync();
-
                 supplier.DeleteFlag = false;
                 supplier.UpdateAt = DateTime.Now;
                 supplier.UpdateUser = staffId;
