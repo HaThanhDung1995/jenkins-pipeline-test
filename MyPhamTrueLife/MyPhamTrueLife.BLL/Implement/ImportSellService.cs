@@ -85,6 +85,7 @@ namespace MyPhamTrueLife.BLL.Implement
                         int priceI = product.Price.Value + 10000;
                         price += (item.Amount.Value * priceI);
                         detaial.Prize = priceI;
+                        detaial.ProductId = item.ProductId;
                         detaial.Amount = item.Amount;
                         detaial.ImportSellId = importSellId;
                         detaial.CreateAt = DateTime.Now;
