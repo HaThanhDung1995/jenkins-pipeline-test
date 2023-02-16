@@ -78,12 +78,17 @@ namespace MyPhamTrueLife.BLL.Implement
             {
                 foreach (var item in value)
                 {
-                    price += (item.Amount.Value * item.Prize.Value);
-                    item.ImportSellId = importSellId;
-                    item.CreateAt = DateTime.Now;
-                    item.CreateUser = staffId;
-                    item.DeleteFlag = false;
-                    await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(item);
+                    var product = await _unitOfWork.Repository<InfoPriceProduct>().Where(x => x.DeleteFlag != true && x.ProductId == item.ProductId).AsNoTracking().FirstOrDefaultAsync();
+                    if (product != null)
+                    {
+                        int priceI = product.Price.Value + 10000;
+                        price += (item.Amount.Value * priceI);
+                        item.ImportSellId = importSellId;
+                        item.CreateAt = DateTime.Now;
+                        item.CreateUser = staffId;
+                        item.DeleteFlag = false;
+                        await _unitOfWork.Repository<InfoDetailImportSell>().AddAsync(item);
+                    }
                 }
                 await _unitOfWork.SaveChangeAsync();
 
