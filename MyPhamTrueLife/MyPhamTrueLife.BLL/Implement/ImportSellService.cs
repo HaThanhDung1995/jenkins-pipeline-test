@@ -59,6 +59,7 @@ namespace MyPhamTrueLife.BLL.Implement
             foreach (var item in listInfoImportSell)
             {
                 item.Supplier = item.SupplierId != null ? await _unitOfWork.Repository<InfoSupplier>().Where(x=>x.DeleteFlag != true && x.SupplierId == item.SupplierId).AsNoTracking().FirstOrDefaultAsync() : null;
+                item.Staff = item.StaffId != null ? await _unitOfWork.Repository<InfoStaff>().Where(x => x.DeleteFlag != true && x.StaffId == item.StaffId).AsNoTracking().FirstOrDefaultAsync() : null;
             }
             
             var totalRows = listInfoImportSell.Count();
@@ -137,6 +138,7 @@ namespace MyPhamTrueLife.BLL.Implement
             var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
             if (importSell != null)
             {
+                importSell.StaffId = staffId;
                 importSell.DeleteFlag = false;
                 importSell.UpdateAt = DateTime.Now;
                 importSell.UpdateUser = staffId;
@@ -152,6 +154,7 @@ namespace MyPhamTrueLife.BLL.Implement
             var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
             if (importSell != null)
             {
+                importSell.StaffId = staffId;
                 importSell.DeleteFlag = false;
                 importSell.UpdateAt = DateTime.Now;
                 importSell.UpdateUser = staffId;
@@ -167,6 +170,7 @@ namespace MyPhamTrueLife.BLL.Implement
             var importSell = await _unitOfWork.Repository<InfoImportSell>().Where(x => x.DeleteFlag != true && x.ImportSellId == importSellId).AsNoTracking().FirstOrDefaultAsync();
             if (importSell != null)
             {
+                importSell.StaffId = staffId;
                 importSell.DeleteFlag = false;
                 importSell.UpdateAt = DateTime.Now;
                 importSell.UpdateUser = staffId;
